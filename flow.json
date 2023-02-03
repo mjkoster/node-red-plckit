@@ -11,8 +11,8 @@
         "id": "3dcddec6b3706966",
         "type": "junction",
         "z": "da1da3acd2b01b0a",
-        "x": 180,
-        "y": 260,
+        "x": 200,
+        "y": 320,
         "wires": [
             [
                 "d1174de12deed6a7",
@@ -24,8 +24,8 @@
         "id": "e1c80ca37b747f75",
         "type": "junction",
         "z": "da1da3acd2b01b0a",
-        "x": 380,
-        "y": 260,
+        "x": 400,
+        "y": 320,
         "wires": [
             [
                 "594d78093e83adf9",
@@ -38,8 +38,8 @@
         "id": "6a64198002e53a9c",
         "type": "junction",
         "z": "da1da3acd2b01b0a",
-        "x": 620,
-        "y": 260,
+        "x": 640,
+        "y": 320,
         "wires": [
             [
                 "115cef04de54266d",
@@ -60,8 +60,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 90,
-        "y": 220,
+        "x": 110,
+        "y": 240,
         "wires": [
             [
                 "3dcddec6b3706966"
@@ -79,8 +79,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 90,
-        "y": 260,
+        "x": 110,
+        "y": 280,
         "wires": [
             [
                 "3dcddec6b3706966"
@@ -98,8 +98,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 90,
-        "y": 300,
+        "x": 110,
+        "y": 320,
         "wires": [
             [
                 "3dcddec6b3706966"
@@ -117,8 +117,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 240,
+        "x": 300,
+        "y": 280,
         "wires": [
             [
                 "e1c80ca37b747f75"
@@ -136,8 +136,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 180,
+        "x": 520,
+        "y": 240,
         "wires": [
             [
                 "6a64198002e53a9c"
@@ -155,8 +155,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
-        "y": 220,
+        "x": 730,
+        "y": 240,
         "wires": [
             []
         ]
@@ -172,8 +172,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
-        "y": 260,
+        "x": 730,
+        "y": 280,
         "wires": [
             []
         ]
@@ -189,8 +189,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
-        "y": 300,
+        "x": 730,
+        "y": 320,
         "wires": [
             []
         ]
@@ -206,8 +206,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 280,
+        "x": 300,
+        "y": 320,
         "wires": [
             [
                 "e1c80ca37b747f75"
@@ -225,8 +225,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 220,
+        "x": 520,
+        "y": 280,
         "wires": [
             [
                 "6a64198002e53a9c"
@@ -244,8 +244,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
-        "y": 260,
+        "x": 520,
+        "y": 320,
         "wires": [
             [
                 "6a64198002e53a9c"
@@ -258,8 +258,8 @@
         "z": "da1da3acd2b01b0a",
         "name": "State Transition Loop",
         "info": "",
-        "x": 500,
-        "y": 320,
+        "x": 520,
+        "y": 380,
         "wires": []
     },
     {
@@ -268,8 +268,8 @@
         "z": "da1da3acd2b01b0a",
         "name": "Inputs",
         "info": "",
-        "x": 90,
-        "y": 160,
+        "x": 110,
+        "y": 380,
         "wires": []
     },
     {
@@ -278,18 +278,8 @@
         "z": "da1da3acd2b01b0a",
         "name": "Conditions",
         "info": "",
-        "x": 280,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "2751ac652dc34678",
-        "type": "comment",
-        "z": "da1da3acd2b01b0a",
-        "name": "States",
-        "info": "",
-        "x": 500,
-        "y": 127,
+        "x": 300,
+        "y": 380,
         "wires": []
     },
     {
@@ -298,8 +288,8 @@
         "z": "da1da3acd2b01b0a",
         "name": "Outputs",
         "info": "",
-        "x": 710,
-        "y": 160,
+        "x": 730,
+        "y": 380,
         "wires": []
     }
 ]
