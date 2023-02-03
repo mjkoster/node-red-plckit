@@ -1,0 +1,305 @@
+[
+    {
+        "id": "da1da3acd2b01b0a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3dcddec6b3706966",
+        "type": "junction",
+        "z": "da1da3acd2b01b0a",
+        "x": 180,
+        "y": 260,
+        "wires": [
+            [
+                "d1174de12deed6a7",
+                "4d64249f04560b23"
+            ]
+        ]
+    },
+    {
+        "id": "e1c80ca37b747f75",
+        "type": "junction",
+        "z": "da1da3acd2b01b0a",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "594d78093e83adf9",
+                "117b647b4fd5038d",
+                "7377714dae89dd97"
+            ]
+        ]
+    },
+    {
+        "id": "6a64198002e53a9c",
+        "type": "junction",
+        "z": "da1da3acd2b01b0a",
+        "x": 620,
+        "y": 260,
+        "wires": [
+            [
+                "115cef04de54266d",
+                "60405cc8e84a2540",
+                "8f9ee785ca70810c",
+                "e1c80ca37b747f75"
+            ]
+        ]
+    },
+    {
+        "id": "7d52ab25d3c33d71",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "In_1",
+        "func": "node.value = msg.payload\nflow.input[node.name] = node.value\nmsg.topic = \"input\"\nmsg.payload = {}\nmsg.payload[node.name] = node.value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 90,
+        "y": 220,
+        "wires": [
+            [
+                "3dcddec6b3706966"
+            ]
+        ]
+    },
+    {
+        "id": "579946f2235cdbcd",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "In_2",
+        "func": "node.value = msg.payload\nflow.input[node.name] = node.value\nmsg.topic = \"input\"\nmsg.payload = {}\nmsg.payload[node.name] = node.value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 90,
+        "y": 260,
+        "wires": [
+            [
+                "3dcddec6b3706966"
+            ]
+        ]
+    },
+    {
+        "id": "8b2f203309471ee9",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "In_3",
+        "func": "node.value = msg.payload\nflow.input[node.name] = node.value\nmsg.topic = \"input\"\nmsg.payload = {}\nmsg.payload[node.name] = node.value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "3dcddec6b3706966"
+            ]
+        ]
+    },
+    {
+        "id": "d1174de12deed6a7",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "Cond_1",
+        "func": "node.condition = \"flow.In_1 && flow.In_2\"\nif( msg.topic == \"input\" && eval(node.condition)) {\n  msg.topic = \"condition\"\n  msg.payload = node.name\n  return msg; \n  }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 240,
+        "wires": [
+            [
+                "e1c80ca37b747f75"
+            ]
+        ]
+    },
+    {
+        "id": "117b647b4fd5038d",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "State_1",
+        "func": "node.transitions = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions ) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && flow.state == node.name ) {\n    flow.state = msg.payload\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "6a64198002e53a9c"
+            ]
+        ]
+    },
+    {
+        "id": "115cef04de54266d",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "Out_1",
+        "func": "if (msg.topic == \"output\" && node.name in msg.payload) {\n    node.value = msg.payload[node.name]\n    msg.payload = node.value\n    return msg\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "60405cc8e84a2540",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "Out_2",
+        "func": "if (msg.topic == \"output\" && node.name in msg.payload) {\n    node.value = msg.payload[node.name]\n    msg.payload = node.value\n    return msg\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f9ee785ca70810c",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "Out_3",
+        "func": "if (msg.topic == \"output\" && node.name in msg.payload) {\n    node.value = msg.payload[node.name]\n    msg.payload = node.value\n    return msg\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4d64249f04560b23",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "Cond_2",
+        "func": "node.condition = \"flow.In_1 && flow.In_2\"\nif (msg.topic == \"input\" && eval(node.condition)) {\n    msg.topic = \"condition\"\n    msg.payload = node.name\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "e1c80ca37b747f75"
+            ]
+        ]
+    },
+    {
+        "id": "594d78093e83adf9",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "State_2",
+        "func": "node.transitions = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && flow.state == node.name) {\n    flow.state = msg.payload\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "6a64198002e53a9c"
+            ]
+        ]
+    },
+    {
+        "id": "7377714dae89dd97",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "State_3",
+        "func": "node.transitions = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && flow.state == node.name) {\n    flow.state = msg.payload\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 260,
+        "wires": [
+            [
+                "6a64198002e53a9c"
+            ]
+        ]
+    },
+    {
+        "id": "e8785ee63bea8d04",
+        "type": "comment",
+        "z": "da1da3acd2b01b0a",
+        "name": "State Transition Loop",
+        "info": "",
+        "x": 500,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "1ab28ff2f5bda250",
+        "type": "comment",
+        "z": "da1da3acd2b01b0a",
+        "name": "Inputs",
+        "info": "",
+        "x": 90,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fb4f3230d15c6c9d",
+        "type": "comment",
+        "z": "da1da3acd2b01b0a",
+        "name": "Conditions",
+        "info": "",
+        "x": 280,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2751ac652dc34678",
+        "type": "comment",
+        "z": "da1da3acd2b01b0a",
+        "name": "States",
+        "info": "",
+        "x": 500,
+        "y": 127,
+        "wires": []
+    },
+    {
+        "id": "60034b3c62b9e99d",
+        "type": "comment",
+        "z": "da1da3acd2b01b0a",
+        "name": "Outputs",
+        "info": "",
+        "x": 710,
+        "y": 160,
+        "wires": []
+    }
+]
