@@ -11,12 +11,13 @@
         "id": "3dcddec6b3706966",
         "type": "junction",
         "z": "da1da3acd2b01b0a",
-        "x": 200,
+        "x": 280,
         "y": 320,
         "wires": [
             [
                 "d1174de12deed6a7",
-                "4d64249f04560b23"
+                "4d64249f04560b23",
+                "412cd87458afe32b"
             ]
         ]
     },
@@ -24,13 +25,14 @@
         "id": "e1c80ca37b747f75",
         "type": "junction",
         "z": "da1da3acd2b01b0a",
-        "x": 400,
+        "x": 480,
         "y": 320,
         "wires": [
             [
                 "594d78093e83adf9",
                 "117b647b4fd5038d",
-                "7377714dae89dd97"
+                "7377714dae89dd97",
+                "480b1bdc2f726bf0"
             ]
         ]
     },
@@ -38,14 +40,15 @@
         "id": "6a64198002e53a9c",
         "type": "junction",
         "z": "da1da3acd2b01b0a",
-        "x": 640,
+        "x": 680,
         "y": 320,
         "wires": [
             [
                 "115cef04de54266d",
                 "60405cc8e84a2540",
                 "8f9ee785ca70810c",
-                "e1c80ca37b747f75"
+                "e1c80ca37b747f75",
+                "5089e97d12b9244a"
             ]
         ]
     },
@@ -60,7 +63,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode[\"initialValue\"] = 0\nflow[node.name] = node.initialValue",
         "finalize": "",
         "libs": [],
-        "x": 110,
+        "x": 190,
         "y": 240,
         "wires": [
             [
@@ -79,7 +82,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode[\"initialValue\"] = 0\nflow[node.name] = node.initialValue",
         "finalize": "",
         "libs": [],
-        "x": 110,
+        "x": 190,
         "y": 280,
         "wires": [
             [
@@ -98,7 +101,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode[\"initialValue\"] = 0\nflow[node.name] = node.initialValue",
         "finalize": "",
         "libs": [],
-        "x": 110,
+        "x": 190,
         "y": 320,
         "wires": [
             [
@@ -111,13 +114,13 @@
         "type": "function",
         "z": "da1da3acd2b01b0a",
         "name": "Cond_1",
-        "func": "node.condition = \"flow.In_1 && flow.In_2\"\nif( msg.topic == \"input\" && eval(node.condition)) {\n  msg.topic = \"condition\"\n  msg.payload = node.name\n  return msg; \n  }",
+        "func": "node.condition = \"flow.In_1==1 && flow.In_2==1 && flow.In_3==0\"\nif (msg.topic == \"input\" && eval(node.condition)) {\n  msg.topic = \"condition\"\n  msg.payload = node.name\n  return msg; \n  }",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
+        "x": 380,
         "y": 280,
         "wires": [
             [
@@ -136,7 +139,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode.initialState = true\nif (node.initialState) {\n    flow.state = node.name\n}",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 580,
         "y": 240,
         "wires": [
             [
@@ -155,10 +158,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
+        "x": 770,
         "y": 240,
         "wires": [
-            []
+            [
+                "9dbe8f06056e966e"
+            ]
         ]
     },
     {
@@ -172,10 +177,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
+        "x": 770,
         "y": 280,
         "wires": [
-            []
+            [
+                "9dbe8f06056e966e"
+            ]
         ]
     },
     {
@@ -189,10 +196,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
+        "x": 770,
         "y": 320,
         "wires": [
-            []
+            [
+                "9dbe8f06056e966e"
+            ]
         ]
     },
     {
@@ -200,13 +209,13 @@
         "type": "function",
         "z": "da1da3acd2b01b0a",
         "name": "Cond_2",
-        "func": "node.condition = \"flow.In_3 && !flow.In_1 && !flow.In_2\"\nif (msg.topic == \"input\" && eval(node.condition)) {\n    msg.topic = \"condition\"\n    msg.payload = node.name\n    return msg;\n}",
+        "func": "node.condition = \"flow.In_3==1\"\nif (msg.topic == \"input\" && eval(node.condition)) {\n    msg.topic = \"condition\"\n    msg.payload = node.name\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
+        "x": 380,
         "y": 320,
         "wires": [
             [
@@ -219,13 +228,13 @@
         "type": "function",
         "z": "da1da3acd2b01b0a",
         "name": "State_2",
-        "func": "node.transitions = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.state = node.name\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
+        "func": "node.transitions = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 0,\n    \"Out_2\": 1,\n    \"Out_3\": 0\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.state = node.name\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode.initialState = false\nif (node.initialState) {\n    flow.state = node.name\n}",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 580,
         "y": 280,
         "wires": [
             [
@@ -238,13 +247,13 @@
         "type": "function",
         "z": "da1da3acd2b01b0a",
         "name": "State_3",
-        "func": "node.transitions = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.state = node.name\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
+        "func": "node.transitions = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}\nnode.outputs = {\n    \"Out_1\": 1,\n    \"Out_2\": 0,\n    \"Out_3\": 0\n}\nif (msg.topic == \"condidtion\" && flow.state == node.name) {\n    if (msg.payload in node.transitions) {\n        msg.topic = \"transition\"\n        msg.payload = node.transitions[msg.payload]\n        return msg\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.state = node.name\n    flow.outputs = node.outputs\n    msg.topic = \"output\"\n    msg.payload = node.outputs\n    return msg\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode.initialState = false\nif (node.initialState) {\n    flow.state = node.name\n}",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 580,
         "y": 320,
         "wires": [
             [
@@ -256,9 +265,9 @@
         "id": "e8785ee63bea8d04",
         "type": "comment",
         "z": "da1da3acd2b01b0a",
-        "name": "State Transition Loop",
+        "name": "State Transitions",
         "info": "",
-        "x": 520,
+        "x": 580,
         "y": 380,
         "wires": []
     },
@@ -268,7 +277,7 @@
         "z": "da1da3acd2b01b0a",
         "name": "Inputs",
         "info": "",
-        "x": 110,
+        "x": 190,
         "y": 380,
         "wires": []
     },
@@ -278,7 +287,7 @@
         "z": "da1da3acd2b01b0a",
         "name": "Conditions",
         "info": "",
-        "x": 300,
+        "x": 380,
         "y": 380,
         "wires": []
     },
@@ -288,8 +297,250 @@
         "z": "da1da3acd2b01b0a",
         "name": "Outputs",
         "info": "",
-        "x": 730,
+        "x": 770,
         "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d12ac0647e301c77",
+        "type": "inject",
+        "z": "da1da3acd2b01b0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "input",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 90,
+        "y": 620,
+        "wires": [
+            [
+                "8b2f203309471ee9"
+            ]
+        ]
+    },
+    {
+        "id": "649b2cdc6fb16c7f",
+        "type": "inject",
+        "z": "da1da3acd2b01b0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "input",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 660,
+        "wires": [
+            [
+                "8b2f203309471ee9"
+            ]
+        ]
+    },
+    {
+        "id": "d1df1aa8ce41f000",
+        "type": "inject",
+        "z": "da1da3acd2b01b0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "input",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 90,
+        "y": 460,
+        "wires": [
+            [
+                "7d52ab25d3c33d71"
+            ]
+        ]
+    },
+    {
+        "id": "506b3a19b64dba70",
+        "type": "inject",
+        "z": "da1da3acd2b01b0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "input",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 500,
+        "wires": [
+            [
+                "7d52ab25d3c33d71"
+            ]
+        ]
+    },
+    {
+        "id": "99b70101db01b2da",
+        "type": "inject",
+        "z": "da1da3acd2b01b0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "input",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 90,
+        "y": 540,
+        "wires": [
+            [
+                "579946f2235cdbcd"
+            ]
+        ]
+    },
+    {
+        "id": "30f39e69a294b12a",
+        "type": "inject",
+        "z": "da1da3acd2b01b0a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "input",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 580,
+        "wires": [
+            [
+                "579946f2235cdbcd"
+            ]
+        ]
+    },
+    {
+        "id": "412cd87458afe32b",
+        "type": "debug",
+        "z": "da1da3acd2b01b0a",
+        "name": "inputs",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "480b1bdc2f726bf0",
+        "type": "debug",
+        "z": "da1da3acd2b01b0a",
+        "name": "conditions",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5089e97d12b9244a",
+        "type": "debug",
+        "z": "da1da3acd2b01b0a",
+        "name": "transitions",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9dbe8f06056e966e",
+        "type": "debug",
+        "z": "da1da3acd2b01b0a",
+        "name": "outputs",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 200,
         "wires": []
     }
 ]
