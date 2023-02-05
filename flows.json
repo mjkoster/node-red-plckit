@@ -89,7 +89,8 @@
             [
                 "3dcddec6b3706966"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-sign-in"
     },
     {
         "id": "8b2f203309471ee9",
@@ -108,7 +109,8 @@
             [
                 "3dcddec6b3706966"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-sign-in"
     },
     {
         "id": "d1174de12deed6a7",
@@ -128,7 +130,7 @@
                 "e1c80ca37b747f75"
             ]
         ],
-        "icon": "node-red/join.svg"
+        "icon": "font-awesome/fa-filter"
     },
     {
         "id": "117b647b4fd5038d",
@@ -187,7 +189,8 @@
             [
                 "9dbe8f06056e966e"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-sign-out"
     },
     {
         "id": "8f9ee785ca70810c",
@@ -206,7 +209,8 @@
             [
                 "9dbe8f06056e966e"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-sign-out"
     },
     {
         "id": "4d64249f04560b23",
@@ -225,7 +229,8 @@
             [
                 "e1c80ca37b747f75"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-filter"
     },
     {
         "id": "594d78093e83adf9",
@@ -244,7 +249,8 @@
             [
                 "6a64198002e53a9c"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-cogs"
     },
     {
         "id": "7377714dae89dd97",
@@ -263,7 +269,8 @@
             [
                 "6a64198002e53a9c"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-cogs"
     },
     {
         "id": "e8785ee63bea8d04",
