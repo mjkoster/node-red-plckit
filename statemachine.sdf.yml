@@ -1,0 +1,79 @@
+---
+info:
+  title: Model for the finite state machine implemented in Node-RED and other targets
+  version: 2023-02-04
+  copyright: "Copyright 2021, Michael J. Koster. All rights reserved."
+  license: "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+
+sdfObject:
+  StateMachine:
+
+    sdfProperty:
+      input:
+        minItems: 0
+        type: object
+          properties:
+            name:
+              type: string
+            value:
+              sdfChoice:
+                number:
+                  type: number
+                string:
+                  type: string
+                boolean:
+                  type: boolean
+
+      output:
+        minItems: 0
+        type: object
+          properties:
+            name:
+              type: string
+            value:
+              sdfChoice:
+                number:
+                  type: number
+                string:
+                  type: string
+                boolean:
+                  type: boolean
+
+      condition:
+        minItems: 0
+        type: object
+          properties:
+            name:
+              type: string
+            expression:
+              type: string
+
+    sdfObject:
+      state:
+        minItems: 1
+        sdfProperty:
+          name: 
+            type: string
+          output:
+            minItems: 0
+            sdfRef: /#/sdfObject/StateMachine/sdfProperty/output
+          condition:
+            minItems: 0
+            sdfRef: /#/sdfObject/StateMachine/sdfProperty/condition
+          transition:
+            minItems: 0
+            type: object
+              properties:
+                condition:
+                state:
+
+    sdfData:
+      messageType:
+        sdfChoice:
+          init:
+          reset:
+          input:
+          condition:
+          transition:
+          output:
+      

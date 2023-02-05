@@ -69,7 +69,8 @@
             [
                 "3dcddec6b3706966"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-sign-in"
     },
     {
         "id": "579946f2235cdbcd",
@@ -126,7 +127,8 @@
             [
                 "e1c80ca37b747f75"
             ]
-        ]
+        ],
+        "icon": "node-red/join.svg"
     },
     {
         "id": "117b647b4fd5038d",
@@ -136,7 +138,7 @@
         "func": "if (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = true;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = false;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}",
         "finalize": "",
         "libs": [],
         "x": 620,
@@ -145,7 +147,8 @@
             [
                 "6a64198002e53a9c"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-cogs"
     },
     {
         "id": "115cef04de54266d",
@@ -164,7 +167,8 @@
             [
                 "9dbe8f06056e966e"
             ]
-        ]
+        ],
+        "icon": "font-awesome/fa-sign-out"
     },
     {
         "id": "60405cc8e84a2540",
@@ -250,7 +254,7 @@
         "func": "if (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = false;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 1,\n    \"Out_2\": 0,\n    \"Out_3\": 0\n}",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = true;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 1,\n    \"Out_2\": 0,\n    \"Out_3\": 0\n}",
         "finalize": "",
         "libs": [],
         "x": 620,
