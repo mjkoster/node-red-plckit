@@ -1,0 +1,149 @@
+---
+info:
+  title: Model for the finite state machine implemented in Node-RED and other targets
+  version: 2023-02-04
+  copyright: "Copyright 2023, Michael J. Koster. All rights reserved."
+  license: "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
+
+sdfObject:
+  StateMachine:
+
+    sdfData:
+      ValueType:
+        sdfChoice:
+          number:
+            type: number
+          string:
+            type: string
+          boolean:
+            type: boolean
+
+    sdfObject:
+
+      input:
+        minItems: 0
+        sdfProperty:
+          inputName:
+            type: string
+          value:
+            sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
+        sdfAction:
+          init:
+          reset:
+        sdfEvent:
+          input:
+            sdfOutputData:
+              type: object
+              properties: 
+                inputName:
+                  type: string
+                value: 
+                  sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
+
+      output:
+        minItems: 0
+        sdfProperty:
+          outputName:
+            type: string
+          value:
+            sdfChoice:
+              sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
+        sdfAction: 
+          init:
+          reset:
+          output:
+            sdfInputData:
+              type: object
+              properties:
+                outputName:
+                  type: string
+                value: 
+                  sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
+
+      condition:
+        minItems: 0
+        sdfProperty:
+          conditionName:
+            type: string
+          expression:
+            type: string
+        sdfAction:
+          init:
+          reset:
+          input:
+            sdfInputData:
+              type: object
+              properties:
+                outputName:
+                  type: string
+                value: 
+                  sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
+        sdfEvent:
+          condition:
+            sdfOutputData:
+              type: object
+              properties:
+                conditionName:
+                  type: string
+
+      state:
+        minItems: 1
+        sdfProperty:
+          stateName: 
+            type: string
+        sdfObject:
+          output:
+            minItems: 0
+            sdfRef: /#/sdfObject/StateMachine/sdfObject/output
+          condition:
+            minItems: 0
+            sdfRef: /#/sdfObject/StateMachine/sdfObject/condition
+          transition:
+            minItems: 0
+              sdfProperty:
+                conditionName: 
+                  type: string
+                stateName:
+                  type: string
+        sdfAction:
+          input:
+            sdfInputData:
+              type: object
+              properties:
+                outputName:
+                  type: string
+                value: 
+          condition:
+            sdfInputData:
+              type: object
+              properties:
+                conditionName:
+                  type: string
+          transition:
+            sdfInputData:
+              type: object
+              properties:
+                stateName:
+                  type: string
+        sdfEvent:
+          condition:
+            sdfOutputData:
+              type: object
+              properties:
+                conditionName:
+                  type: string
+          transition:
+            sdfOutputData:
+              type: object
+              properties:
+                stateName:
+                  type: string
+          output:
+            sdfOutputData:
+              type: object
+              properties:
+                outputName:
+                  type: string
+                value: 
+                  sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
+

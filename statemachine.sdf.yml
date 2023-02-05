@@ -2,7 +2,7 @@
 info:
   title: Model for the finite state machine implemented in Node-RED and other targets
   version: 2023-02-04
-  copyright: "Copyright 2021, Michael J. Koster. All rights reserved."
+  copyright: "Copyright 2023, Michael J. Koster. All rights reserved."
   license: "https://github.com/one-data-model/oneDM/blob/master/LICENSE"
 
 sdfObject:
