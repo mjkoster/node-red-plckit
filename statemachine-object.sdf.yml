@@ -20,130 +20,134 @@ sdfObject:
 
     sdfObject:
 
-      input:
+      Input:
+        description: The input object generates named input values
         minItems: 0
         sdfProperty:
-          inputName:
+          InputName:
             type: string
-          value:
+          Value:
             sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
         sdfAction:
-          init:
-          reset:
+          Init:
+          Reset:
         sdfEvent:
-          input:
+          Input:
             sdfOutputData:
               type: object
               properties: 
-                inputName:
+                InputName:
                   type: string
-                value: 
+                Value: 
                   sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
 
-      output:
+      Output:
+        description: The output object consumes named output values from a vector emitted by the state object
         minItems: 0
         sdfProperty:
-          outputName:
+          OutputName:
             type: string
-          value:
+          Value:
             sdfChoice:
               sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
         sdfAction: 
-          init:
-          reset:
-          output:
+          Init:
+          Reset:
+          Output:
             sdfInputData:
               type: object
               properties:
-                outputName:
+                OutputName:
                   type: string
-                value: 
+                Value: 
                   sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
 
-      condition:
+      Condition:
+        The condition object evaluates Input vectors and generates condition events when true
         minItems: 0
         sdfProperty:
-          conditionName:
+          ConditionName:
             type: string
-          expression:
+          Expression:
             type: string
         sdfAction:
-          init:
-          reset:
+          Init:
+          Reset:
           input:
             sdfInputData:
               type: object
               properties:
-                outputName:
+                InputName:
                   type: string
-                value: 
+                Value: 
                   sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
         sdfEvent:
-          condition:
+          Condition:
             sdfOutputData:
               type: object
               properties:
-                conditionName:
+                ConditionName:
                   type: string
 
       state:
+        description: The state object evaluates inputs and generates conditions, evaluates conditions and generates state transition events, and generates output vectors when state transitions occur.
         minItems: 1
         sdfProperty:
-          stateName: 
+          StateName: 
             type: string
         sdfObject:
-          output:
+          Output:
             minItems: 0
-            sdfRef: /#/sdfObject/StateMachine/sdfObject/output
-          condition:
+            sdfRef: /#/sdfObject/StateMachine/sdfObject/Output
+          Condition:
             minItems: 0
-            sdfRef: /#/sdfObject/StateMachine/sdfObject/condition
+            sdfRef: /#/sdfObject/StateMachine/sdfObject/Condition
           transition:
             minItems: 0
               sdfProperty:
-                conditionName: 
+                ConditionName: 
                   type: string
-                stateName:
+                StateName:
                   type: string
         sdfAction:
-          input:
+          Input:
             sdfInputData:
               type: object
               properties:
-                outputName:
+                OutputName:
                   type: string
-                value: 
-          condition:
+                Value: 
+          Condition:
             sdfInputData:
               type: object
               properties:
-                conditionName:
+                ConditionName:
                   type: string
           transition:
             sdfInputData:
               type: object
               properties:
-                stateName:
+                StateName:
                   type: string
         sdfEvent:
-          condition:
+          Condition:
             sdfOutputData:
               type: object
               properties:
-                conditionName:
+                ConditionName:
                   type: string
           transition:
             sdfOutputData:
               type: object
               properties:
-                stateName:
+                StateName:
                   type: string
-          output:
+          Output:
             sdfOutputData:
               type: object
               properties:
-                outputName:
+                OutputName:
                   type: string
-                value: 
+                Value: 
                   sdfRef: /#/sdfObject/StateMachine/sdfData/ValueType
 
