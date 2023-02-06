@@ -1,47 +1,61 @@
 [
     {
-        "id": "017d1a8bd227e961",
+        "id": "da1da3acd2b01b0a",
         "type": "tab",
-        "label": "Flow 2",
+        "label": "Flow 1",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "ca8c31bac1649e08",
+        "id": "3dcddec6b3706966",
         "type": "junction",
-        "z": "017d1a8bd227e961",
-        "x": 280,
+        "z": "da1da3acd2b01b0a",
+        "x": 320,
         "y": 440,
         "wires": [
             [
-                "e7f6bfaab51285c4",
-                "38a2568eb6f345f6",
-                "22111660ecc52b80",
-                "2b81165312283f24"
+                "d1174de12deed6a7",
+                "4d64249f04560b23",
+                "412cd87458afe32b"
             ]
         ]
     },
     {
-        "id": "7e020b4d71394a46",
+        "id": "e1c80ca37b747f75",
         "type": "junction",
-        "z": "017d1a8bd227e961",
-        "x": 480,
+        "z": "da1da3acd2b01b0a",
+        "x": 520,
         "y": 440,
         "wires": [
             [
-                "49548723f3c70647",
-                "9a115ec06d556a5b",
-                "aa7c155cb3035c5a",
-                "ca8c31bac1649e08",
-                "12727a0bc506023b"
+                "594d78093e83adf9",
+                "117b647b4fd5038d",
+                "7377714dae89dd97",
+                "480b1bdc2f726bf0"
             ]
         ]
     },
     {
-        "id": "de072e966b057ce0",
+        "id": "6a64198002e53a9c",
+        "type": "junction",
+        "z": "da1da3acd2b01b0a",
+        "x": 720,
+        "y": 440,
+        "wires": [
+            [
+                "115cef04de54266d",
+                "60405cc8e84a2540",
+                "8f9ee785ca70810c",
+                "e1c80ca37b747f75",
+                "5089e97d12b9244a"
+            ]
+        ]
+    },
+    {
+        "id": "7d52ab25d3c33d71",
         "type": "function",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "In_1",
         "func": "context.value = msg.payload;\nflow.set(node.name, context.value);\nmsg.topic = \"input\";\nmsg.payload = {};\nmsg.payload[node.name] = context.value;\nreturn msg;",
         "outputs": 1,
@@ -49,19 +63,19 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialValue = 0;\nflow.set(node.name, context.initialValue);",
         "finalize": "",
         "libs": [],
-        "x": 190,
+        "x": 230,
         "y": 360,
         "wires": [
             [
-                "ca8c31bac1649e08"
+                "3dcddec6b3706966"
             ]
         ],
         "icon": "font-awesome/fa-sign-in"
     },
     {
-        "id": "b4fbc529b6ac2949",
+        "id": "579946f2235cdbcd",
         "type": "function",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "In_2",
         "func": "context.value = msg.payload;\nflow.set(node.name, context.value);\nmsg.topic = \"input\";\nmsg.payload = {};\nmsg.payload[node.name] = context.value;\nreturn msg;",
         "outputs": 1,
@@ -69,19 +83,19 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialValue = 0;\nflow.set(node.name, context.initialValue);",
         "finalize": "",
         "libs": [],
-        "x": 190,
+        "x": 230,
         "y": 400,
         "wires": [
             [
-                "ca8c31bac1649e08"
+                "3dcddec6b3706966"
             ]
         ],
         "icon": "font-awesome/fa-sign-in"
     },
     {
-        "id": "7342955d4f8bf298",
+        "id": "8b2f203309471ee9",
         "type": "function",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "In_3",
         "func": "context.value = msg.payload;\nflow.set(node.name, context.value);\nmsg.topic = \"input\";\nmsg.payload = {};\nmsg.payload[node.name] = context.value;\nreturn msg;",
         "outputs": 1,
@@ -89,39 +103,59 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialValue = 0;\nflow.set(node.name, context.initialValue);",
         "finalize": "",
         "libs": [],
-        "x": 190,
+        "x": 230,
         "y": 440,
         "wires": [
             [
-                "ca8c31bac1649e08"
+                "3dcddec6b3706966"
             ]
         ],
         "icon": "font-awesome/fa-sign-in"
     },
     {
-        "id": "38a2568eb6f345f6",
+        "id": "d1174de12deed6a7",
         "type": "function",
-        "z": "017d1a8bd227e961",
-        "name": "State_1",
-        "func": "if (msg.topic == \"input\" && flow.get(\"state\") == node.name) {\n    for (var condition in context.condition) {\n        if (eval(context.condition[condition])) {\n            msg.topic = \"condition\";\n            msg.payload = condition;\n            return msg;\n        }\n    } \n}\nif (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
+        "z": "da1da3acd2b01b0a",
+        "name": "Cond_1",
+        "func": "if (msg.topic == \"input\" && eval(context.condition)) {\n  msg.topic = \"condition\";\n  msg.payload = node.name;\n  return msg; \n  }",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = false;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.output = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}\ncontext.condition = {\n    \"Cond_1\": \"flow.get('In_1')==1 && flow.get('In_2')==1 && flow.get('In_3')==0\",\n    \"Cond_2\": \"flow.get('In_3')==1\"\n}\ncontext.transition = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.condition = \"flow.get('In_1')==1 && flow.get('In_2')==1 && flow.get('In_3')==0\";\n",
         "finalize": "",
         "libs": [],
-        "x": 380,
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "e1c80ca37b747f75"
+            ]
+        ],
+        "icon": "font-awesome/fa-filter"
+    },
+    {
+        "id": "117b647b4fd5038d",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "State_1",
+        "func": "if (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = false;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_2\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 0,\n    \"Out_2\": 0,\n    \"Out_3\": 1\n}",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
         "y": 360,
         "wires": [
             [
-                "7e020b4d71394a46"
+                "6a64198002e53a9c"
             ]
         ],
         "icon": "font-awesome/fa-cogs"
     },
     {
-        "id": "49548723f3c70647",
+        "id": "115cef04de54266d",
         "type": "function",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "Out_1",
         "func": "if (msg.topic == \"output\" && node.name in msg.payload) {\n    context.value = msg.payload[node.name];\n    msg.payload = context.value;\n    return msg;\n}",
         "outputs": 1,
@@ -129,19 +163,19 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
+        "x": 810,
         "y": 360,
         "wires": [
             [
-                "efc94ca0d780ef98"
+                "9dbe8f06056e966e"
             ]
         ],
         "icon": "font-awesome/fa-sign-out"
     },
     {
-        "id": "9a115ec06d556a5b",
+        "id": "60405cc8e84a2540",
         "type": "function",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "Out_2",
         "func": "if (msg.topic == \"output\" && node.name in msg.payload) {\n    context.value = msg.payload[node.name];\n    msg.payload = context.value;\n    return msg;\n}",
         "outputs": 1,
@@ -149,19 +183,19 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
+        "x": 810,
         "y": 400,
         "wires": [
             [
-                "efc94ca0d780ef98"
+                "9dbe8f06056e966e"
             ]
         ],
         "icon": "font-awesome/fa-sign-out"
     },
     {
-        "id": "aa7c155cb3035c5a",
+        "id": "8f9ee785ca70810c",
         "type": "function",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "Out_3",
         "func": "if (msg.topic == \"output\" && node.name in msg.payload) {\n    context.value = msg.payload[node.name];\n    msg.payload = context.value;\n    return msg;\n}",
         "outputs": 1,
@@ -169,89 +203,119 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
+        "x": 810,
         "y": 440,
         "wires": [
             [
-                "efc94ca0d780ef98"
+                "9dbe8f06056e966e"
             ]
         ],
         "icon": "font-awesome/fa-sign-out"
     },
     {
-        "id": "e7f6bfaab51285c4",
+        "id": "4d64249f04560b23",
         "type": "function",
-        "z": "017d1a8bd227e961",
-        "name": "State_2",
-        "func": "if (msg.topic == \"input\" && flow.get(\"state\") == node.name) {\n    for (var condition in context.condition) {\n        if (eval(context.condition[condition])) {\n            msg.topic = \"condition\";\n            msg.payload = condition;\n            return msg;\n        }\n    }\n}\nif (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
+        "z": "da1da3acd2b01b0a",
+        "name": "Cond_2",
+        "func": "if (msg.topic == \"input\" && eval(context.condition)) {\n    msg.topic = \"condition\";\n    msg.payload = node.name;\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = false;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.output = {\n    \"Out_1\": 0,\n    \"Out_2\": 1,\n    \"Out_3\": 0\n}\ncontext.condition = {\n    \"Cond_1\": \"flow.get('In_1')==1 && flow.get('In_2')==1 && flow.get('In_3')==0\",\n    \"Cond_2\": \"flow.get('In_3')==1\"\n}\ncontext.transition = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.condition = \"flow.get('In_3')==1\";\n",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 400,
-        "wires": [
-            [
-                "7e020b4d71394a46"
-            ]
-        ],
-        "icon": "font-awesome/fa-cogs"
-    },
-    {
-        "id": "22111660ecc52b80",
-        "type": "function",
-        "z": "017d1a8bd227e961",
-        "name": "State_3",
-        "func": "if (msg.topic == \"input\" && flow.get(\"state\") == node.name) {\n    for (var condition in context.condition) {\n        if (eval(context.condition[condition])) {\n            msg.topic = \"condition\";\n            msg.payload = condition;\n            return msg;\n        }\n    }\n}\nif (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = true;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.output = {\n    \"Out_1\": 1,\n    \"Out_2\": 0,\n    \"Out_3\": 0\n}\ncontext.condition = {\n    \"Cond_1\": \"flow.get('In_1')==1 && flow.get('In_2')==1 && flow.get('In_3')==0\",\n    \"Cond_2\": \"flow.get('In_3')==1\"\n}\ncontext.transition = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
+        "x": 420,
         "y": 440,
         "wires": [
             [
-                "7e020b4d71394a46"
+                "e1c80ca37b747f75"
+            ]
+        ],
+        "icon": "font-awesome/fa-filter"
+    },
+    {
+        "id": "594d78093e83adf9",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "State_2",
+        "func": "if (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = false;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 0,\n    \"Out_2\": 1,\n    \"Out_3\": 0\n}",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 400,
+        "wires": [
+            [
+                "6a64198002e53a9c"
             ]
         ],
         "icon": "font-awesome/fa-cogs"
     },
     {
-        "id": "33f31dd6b6b17d95",
+        "id": "7377714dae89dd97",
+        "type": "function",
+        "z": "da1da3acd2b01b0a",
+        "name": "State_3",
+        "func": "if (msg.topic == \"condition\" && flow.get(\"state\") == node.name) {\n    if (msg.payload in context.transition) {\n        msg.topic = \"transition\";\n        msg.payload = context.transition[msg.payload];\n        return msg;\n    }\n}\nif (msg.topic == \"transition\" && msg.payload == node.name) {\n    flow.set(\"state\", node.name);\n    flow.set(\"output\", context.output);\n    msg.topic = \"output\";\n    msg.payload = context.output;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.initialState = true;\nif (context.initialState) {\n    flow.set(\"state\", node.name);\n}\ncontext.transition = {\n    \"Cond_1\": \"State_1\",\n    \"Cond_2\": \"State_3\"\n}\ncontext.output = {\n    \"Out_1\": 1,\n    \"Out_2\": 0,\n    \"Out_3\": 0\n}",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 440,
+        "wires": [
+            [
+                "6a64198002e53a9c"
+            ]
+        ],
+        "icon": "font-awesome/fa-cogs"
+    },
+    {
+        "id": "e8785ee63bea8d04",
         "type": "comment",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "State Transitions",
         "info": "",
-        "x": 380,
+        "x": 620,
         "y": 500,
         "wires": []
     },
     {
-        "id": "a518a963d7b769de",
+        "id": "1ab28ff2f5bda250",
         "type": "comment",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "Inputs",
         "info": "",
-        "x": 190,
+        "x": 230,
         "y": 500,
         "wires": []
     },
     {
-        "id": "f4b7893fcacaabe8",
+        "id": "fb4f3230d15c6c9d",
         "type": "comment",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
+        "name": "Conditions",
+        "info": "",
+        "x": 420,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "60034b3c62b9e99d",
+        "type": "comment",
+        "z": "da1da3acd2b01b0a",
         "name": "Outputs",
         "info": "",
-        "x": 570,
+        "x": 810,
         "y": 500,
         "wires": []
     },
     {
-        "id": "f40afcab3e042f30",
+        "id": "d12ac0647e301c77",
         "type": "inject",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "",
         "props": [
             {
@@ -269,18 +333,18 @@
         "topic": "input",
         "payload": "1",
         "payloadType": "num",
-        "x": 170,
+        "x": 210,
         "y": 260,
         "wires": [
             [
-                "7342955d4f8bf298"
+                "8b2f203309471ee9"
             ]
         ]
     },
     {
-        "id": "7426d20190263dea",
+        "id": "649b2cdc6fb16c7f",
         "type": "inject",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "",
         "props": [
             {
@@ -298,18 +362,18 @@
         "topic": "input",
         "payload": "0",
         "payloadType": "num",
-        "x": 170,
+        "x": 210,
         "y": 300,
         "wires": [
             [
-                "7342955d4f8bf298"
+                "8b2f203309471ee9"
             ]
         ]
     },
     {
-        "id": "a9bd3d4baaad8283",
+        "id": "d1df1aa8ce41f000",
         "type": "inject",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "",
         "props": [
             {
@@ -327,18 +391,18 @@
         "topic": "input",
         "payload": "1",
         "payloadType": "num",
-        "x": 170,
+        "x": 210,
         "y": 100,
         "wires": [
             [
-                "de072e966b057ce0"
+                "7d52ab25d3c33d71"
             ]
         ]
     },
     {
-        "id": "f9457decb82b06af",
+        "id": "506b3a19b64dba70",
         "type": "inject",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "",
         "props": [
             {
@@ -356,18 +420,18 @@
         "topic": "input",
         "payload": "0",
         "payloadType": "num",
-        "x": 170,
+        "x": 210,
         "y": 140,
         "wires": [
             [
-                "de072e966b057ce0"
+                "7d52ab25d3c33d71"
             ]
         ]
     },
     {
-        "id": "8aeea13df3f80ed4",
+        "id": "99b70101db01b2da",
         "type": "inject",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "",
         "props": [
             {
@@ -385,18 +449,18 @@
         "topic": "input",
         "payload": "1",
         "payloadType": "num",
-        "x": 170,
+        "x": 210,
         "y": 180,
         "wires": [
             [
-                "b4fbc529b6ac2949"
+                "579946f2235cdbcd"
             ]
         ]
     },
     {
-        "id": "ad941eccd8826a1c",
+        "id": "30f39e69a294b12a",
         "type": "inject",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "",
         "props": [
             {
@@ -414,18 +478,35 @@
         "topic": "input",
         "payload": "0",
         "payloadType": "num",
-        "x": 170,
+        "x": 210,
         "y": 220,
         "wires": [
             [
-                "b4fbc529b6ac2949"
+                "579946f2235cdbcd"
             ]
         ]
     },
     {
-        "id": "2b81165312283f24",
+        "id": "412cd87458afe32b",
         "type": "debug",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
+        "name": "cond in",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "480b1bdc2f726bf0",
+        "type": "debug",
+        "z": "da1da3acd2b01b0a",
         "name": "state in",
         "active": true,
         "tosidebar": true,
@@ -435,14 +516,14 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 360,
-        "y": 200,
+        "x": 500,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "12727a0bc506023b",
+        "id": "5089e97d12b9244a",
         "type": "debug",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "state out",
         "active": true,
         "tosidebar": true,
@@ -452,14 +533,14 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 500,
-        "y": 240,
+        "x": 700,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "efc94ca0d780ef98",
+        "id": "9dbe8f06056e966e",
         "type": "debug",
-        "z": "017d1a8bd227e961",
+        "z": "da1da3acd2b01b0a",
         "name": "outputs",
         "active": true,
         "tosidebar": true,
@@ -469,7 +550,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
+        "x": 900,
         "y": 280,
         "wires": []
     }
