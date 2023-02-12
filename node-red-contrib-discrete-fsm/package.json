@@ -1,0 +1,17 @@
+{
+  "name": "node-red-contrib-discrete-fsm",
+  "version": "0.0.1",
+  "description": "Discrete node state machine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Koster",
+  "license": "MIT",
+  "node-red" : {
+    "nodes": {
+        "lower-case": "lower-case.js"
+    }
+  }
+
+}
