@@ -16,7 +16,7 @@ module.exports = function(RED) {
                 }
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
-                if ( mathjs.parse(node.expression).compile().evaluate({"In_1": true}) ) {
+                if ( mathjs.parse(node.expression).evaluate({"In_1": true}) ) {
                     msg.topic = "condition"
                     msg.payload = node.name;
                     node.send(msg);
