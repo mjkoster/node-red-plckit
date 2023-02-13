@@ -4,7 +4,9 @@
       color: '#3FADB5',
       defaults: {
           name: {value:""},
-          expression: {value:"true"}
+          expression: {value:"true"},
+          oninputtopic: {value: true},
+          onsynctopic: {value: false}
       },
       inputs:1,
       outputs:1,
@@ -26,6 +28,13 @@
   <div class="form-row">
     <label for="node-input-expression"><i class="fa fa-filter"></i> Expression</label>
     <input type="text" id="node-input-expression" placeholder="Expression">
+</div>
+<div class="form-row">
+  <label>Evaluate expression on:</label>
+  <input type="checkbox" id="node-input-oninputtopic" style="display: inline-block; width: auto; vertical-align: top;">
+  <label for="node-input-oninputtopic">InputMessage</label>
+  <input type="checkbox" id="node-input-onsynctopic" style="display: inline-block; width: auto; vertical-align: top;">
+  <label for="node-input-onsynctopic">Sync Message</label>
 </div>
 </script>
 
