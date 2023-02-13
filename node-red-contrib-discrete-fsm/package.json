@@ -12,5 +12,8 @@
     "nodes": {
         "condition": "condition.js"
     }
+  },
+  "dependencies": {
+    "mathjs": "*"
   }
 }
