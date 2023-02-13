@@ -10,8 +10,7 @@
   "license": "MIT",
   "node-red" : {
     "nodes": {
-        "lower-case": "lower-case.js"
+        "condition": "condition.js"
     }
   }
-
 }
