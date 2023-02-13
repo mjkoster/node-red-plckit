@@ -12,7 +12,7 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
                 for ( var input in msg.payload ) {
-                    node[input] = payload[input]
+                    node[input] = msg.payload[input]
                 }
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
