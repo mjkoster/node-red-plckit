@@ -1,5 +1,7 @@
 module.exports = function(RED) {
     function ConditionNode(config) {
+        const mathjs = require('mathjs');
+        
         RED.nodes.createNode(this,config);
 
         this.name = config.name;
