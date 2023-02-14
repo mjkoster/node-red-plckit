@@ -34,9 +34,10 @@ module.exports = function(RED) {
                 msg.topic = "context";
                 msg.payload = context;
                 node.send(msg);
-                msg.topic = "scope";
-                msg.payload = scope;
-                node.send(msg);
+
+                //msg.topic = "scope";
+                //msg.payload = scope;
+                //node.send(msg);
 
                 if ( condition.evaluate(scope) ) {
                     msg.topic = "condition"
