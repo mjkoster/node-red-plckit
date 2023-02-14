@@ -7,7 +7,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
 
         var node = this;
-
+        
         node.name = config.name;
         node.expression = config.expression;
         node.oninputtopic = config.oninputtopic;
@@ -15,9 +15,9 @@ module.exports = function(RED) {
 
         node.on('input', function(msg) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
-                msg.payload.keys().forEach(input => {
+                for ( var input in msg.payload ) {
                     node.context().set(input, msg.payload[input]);
-                });
+                }
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
                 var scope = {};
