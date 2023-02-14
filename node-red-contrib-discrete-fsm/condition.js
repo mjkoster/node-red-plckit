@@ -31,13 +31,9 @@ module.exports = function(RED) {
                     context[property] = node.context().get(property);
                 });       
 
-                msg.topic = "context";
-                msg.payload = context;
+                msg.topic = "scope";
+                msg.payload = scope;
                 node.send(msg);
-
-                //msg.topic = "scope";
-                //msg.payload = scope;
-                //node.send(msg);
 
                 if ( condition.evaluate(scope) ) {
                     msg.topic = "condition"
