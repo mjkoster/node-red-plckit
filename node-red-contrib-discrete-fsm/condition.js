@@ -13,13 +13,16 @@ module.exports = function(RED) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
                 for ( var input in msg.payload ) {
                     node.context().set(input, msg.payload[input]);
-                    node[input] = msg.payload[input];
                 }
             }
-            msg.topic = "debug";
-            msg.payload = node.context();
+            var context = {};
+            for ( var property in node.context().keys() ) {
+                context[property] = node.context().get(property);
+            };
+            msg.topic = "context";
+            msg.payload = context;
             node.send(msg);
-
+    
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
                 const condition =  mathjs.parse(expression);
                 const vnodes = condition.filter(isVariable);
@@ -27,6 +30,10 @@ module.exports = function(RED) {
                 vnodes.forEach(vnode => {
                     scope[vnode.name] = node.context().get(vnode.name);
                 });
+                msg.topic = "scope";
+                msg.payload = scope;
+                node.send(msg);
+        
                 if ( condition.evaluate(scope) ) {
                     msg.topic = "condition"
                     msg.payload = node.name;
