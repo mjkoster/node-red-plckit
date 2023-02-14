@@ -1,0 +1,42 @@
+<script type="text/javascript">
+  RED.nodes.registerType('input',{
+      category: 'DiscreteFSM',
+      color: '#3FADB5',
+      defaults: {
+          name: {value:""},
+          initialvalue: {value:""}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "font-awesome/fa-sign-in",
+      label: function() {
+          return this.name||"input";
+      },
+      labelStyle: function() {
+          return this.name?"node_label_italic":"";
+      },
+      oneditpreparee: function() {
+        $("#node-input-initialvalue").typedInput({
+        type:"bool",
+        types:["str","num","bool"],
+        typeField: "#node-input-initialvalue"
+        })
+      }
+  });
+</script>
+
+<script type="text/html" data-template-name="input">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-default-value"><i class="fa fa-filter"></i> Default Value</label>
+    <input type="text" id="node-input-initialvalue" placeholder="Initial value">
+    <input type="hidden" id="node-input-initialvalue-type">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="input">
+  <p>Receives an input value in a payload and sends it as a key value pair using the node name as key</p>
+</script>
