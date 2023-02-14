@@ -12,7 +12,7 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
                 for ( var input in msg.payload ) {
-                    node.context.set(input, msg.payload[input]);
+                    node.context().set(input, msg.payload[input]);
                 }
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
@@ -20,13 +20,14 @@ module.exports = function(RED) {
                 const vnodes = condition.filter(isVariable);
                 var scope = {};
                 vnodes.forEach(vnode => {
-                    scope[vnode.name] = node.context.get(vnode.name);
+                    scope[vnode.name] = node.context().get(vnode.name);
                 });
-                
+
                 var context = {};
-                for ( var property in node.context.keys() ) {
-                    context[property] = node.context.get(property);
-                };        
+                for ( var property in node.context().keys() ) {
+                    context[property] = node.context().get(property);
+                };       
+                 
                 msg.topic = "context";
                 msg.payload = context;
                 node.send(msg);
