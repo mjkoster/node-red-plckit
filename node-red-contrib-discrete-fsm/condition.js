@@ -32,7 +32,7 @@ module.exports = function(RED) {
                 };       
 
                 msg.topic = "context";
-                msg.payload = node.context().keys();
+                msg.payload = context;
                 node.send(msg);
 
                 //msg.topic = "scope";
