@@ -19,10 +19,10 @@ module.exports = function(RED) {
                 }
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
-                const condition =  mathjs.parse(node.expression);
-                const vnodes = condition.filter(isVariable);
                 var scope = {};
-                vnodes.forEach(vnode => {
+                const condition =  mathjs.parse(node.expression);
+                //const vnodes = condition.filter(isVariable);
+                condition.filter(isVariable).forEach(vnode => {
                     scope[vnode.name] = node.context().get(vnode.name);
                 });
                 if ( condition.evaluate(scope) ) {
