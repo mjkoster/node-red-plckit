@@ -17,7 +17,7 @@ module.exports = function(RED) {
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
                 const condition =  mathjs.parse(node.expression);
-                const vnodes = condition.filter(isVariable);
+                const vnodes = condition.filter(node.isVariable);
                 var scope = {};
                 vnodes.forEach(vnode => {
                     scope[vnode.name] = node.context().get(vnode.name);
