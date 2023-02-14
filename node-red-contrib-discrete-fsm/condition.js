@@ -1,5 +1,8 @@
 module.exports = function(RED) {
     const mathjs = require('mathjs');
+    const isVariable = function (node) {
+        return node.isSymbolNode
+    }
     function ConditionNode(config) {        
         RED.nodes.createNode(this,config);
 
@@ -17,7 +20,7 @@ module.exports = function(RED) {
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
                 const condition =  mathjs.parse(node.expression);
-                const vnodes = condition.filter(node.isVariable);
+                const vnodes = condition.filter(isVariable);
                 var scope = {};
                 vnodes.forEach(vnode => {
                     scope[vnode.name] = node.context().get(vnode.name);
