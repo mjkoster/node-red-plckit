@@ -17,7 +17,7 @@ module.exports = function(RED) {
                 }
             }
             msg.topic = "debug";
-            msg.payload = node;
+            msg.payload = node.context();
             node.send(msg);
 
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
