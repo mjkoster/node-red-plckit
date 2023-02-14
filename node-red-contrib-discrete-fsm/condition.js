@@ -27,9 +27,9 @@ module.exports = function(RED) {
                 });
 
                 var context = {};
-                for ( var property in node.context().keys() ) {
+                node.context().keys().forEach(property => {
                     context[property] = node.context().get(property);
-                };       
+                });       
 
                 msg.topic = "context";
                 msg.payload = context;
