@@ -25,18 +25,8 @@ module.exports = function(RED) {
                 vnodes.forEach(vnode => {
                     scope[vnode.name] = node.context().get(vnode.name);
                 });
-
-                var context = {};
-                node.context().keys().forEach(property => {
-                    context[property] = node.context().get(property);
-                });       
-
-                msg.topic = "scope";
-                msg.payload = scope;
-                node.send(msg);
-
                 if ( condition.evaluate(scope) ) {
-                    msg.topic = "condition"
+                    msg.topic = "condition";
                     msg.payload = node.name;
                     node.send(msg);
                 }
