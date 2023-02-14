@@ -6,12 +6,13 @@ module.exports = function(RED) {
     function ConditionNode(config) {        
         RED.nodes.createNode(this,config);
 
-        this.name = config.name;
-        this.expression = config.expression;
-        this.oninputtopic = config.oninputtopic;
-        this.onsynctopic = config.onsynctopic;
-
         var node = this;
+        
+        node.name = config.name;
+        node.expression = config.expression;
+        node.oninputtopic = config.oninputtopic;
+        node.onsynctopic = config.onsynctopic;
+
         node.on('input', function(msg) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
                 for ( var input in msg.payload ) {
@@ -21,7 +22,6 @@ module.exports = function(RED) {
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
                 var scope = {};
                 const condition =  mathjs.parse(node.expression);
-                //const vnodes = condition.filter(isVariable);
                 condition.filter(isVariable).forEach(vnode => {
                     scope[vnode.name] = node.context().get(vnode.name);
                 });
