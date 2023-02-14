@@ -12,11 +12,22 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
                 for ( var input in msg.payload ) {
-                    node[input] = msg.payload[input]
+                    node.context().set(input, msg.payload[input]);
+                    node[input] = msg.payload[input];
                 }
             }
+            msg.topic = "debug";
+            msg.payload = node;
+            node.send(msg);
+
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
-                if ( mathjs.parse(node.expression).evaluate({"In_1":false}) ) {
+                const condition =  mathjs.parse(expression);
+                const vnodes = condition.filter(isVariable);
+                var scope = {};
+                vnodes.forEach(vnode => {
+                    scope[vnode.name] = node.context().get(vnode.name);
+                });
+                if ( condition.evaluate(scope) ) {
                     msg.topic = "condition"
                     msg.payload = node.name;
                     node.send(msg);
