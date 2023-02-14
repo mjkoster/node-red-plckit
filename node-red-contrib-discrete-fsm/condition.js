@@ -16,7 +16,7 @@ module.exports = function(RED) {
                 }
             }
             if (msg.topic == "input" && node.oninputtopic || msg.topic == "sync" && node.onsynctopic ) {
-                const condition =  mathjs.parse(expression);
+                const condition =  mathjs.parse(node.expression);
                 const vnodes = condition.filter(isVariable);
                 var scope = {};
                 vnodes.forEach(vnode => {
@@ -27,7 +27,7 @@ module.exports = function(RED) {
                 for ( var property in node.context().keys() ) {
                     context[property] = node.context().get(property);
                 };       
-                 
+
                 msg.topic = "context";
                 msg.payload = context;
                 node.send(msg);
