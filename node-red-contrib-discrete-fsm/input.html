@@ -19,7 +19,7 @@
         $("#node-input-initialvalue").typedInput({
         type:"bool",
         types:["str","num","bool"],
-        typeField: "#node-input-initialvalue"
+        typeField: "#node-input-initialvalue-type"
         })
       }
   });
@@ -31,7 +31,7 @@
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
-    <label for="node-input-default-value"><i class="fa fa-filter"></i> Default Value</label>
+    <label for="node-input-initialvalue"><i class="fa fa-filter"></i> Initial Value</label>
     <input type="text" id="node-input-initialvalue" placeholder="Initial value">
     <input type="hidden" id="node-input-initialvalue-type">
   </div>

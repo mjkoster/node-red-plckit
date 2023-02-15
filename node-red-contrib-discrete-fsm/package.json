@@ -10,7 +10,8 @@
   "license": "MIT",
   "node-red" : {
     "nodes": {
-        "condition": "condition.js"
+      "input": "input.js",
+      "condition": "condition.js"
     }
   },
   "dependencies": {
