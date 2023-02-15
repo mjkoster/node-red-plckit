@@ -9,7 +9,11 @@ module.exports = function(RED) {
         node.initialvalue = config.initialvalue;
 
         setTimeout( function() {
-          node.emit("input",{});
+          var msg = {}
+          msg['topic'] = 'init';
+          msg['payload'] = {};
+          msg.payload[node.name] = node.initialvalue;
+          node.send(msg);
         }, 100 );
 
         node.on('input', function(msg) {
