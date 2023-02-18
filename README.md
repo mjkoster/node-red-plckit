@@ -22,7 +22,9 @@ Thus, a state transition involves as many as four messages, an input message to 
 
 State nodes may optionally have local conditions that are evaluated directly on input messages. When a local condition evaluates true, the transition table is checked locally without a condition message being generated. Both global conditions and local conditions are optional, but there needs to be at least one condition defined somewhere for the state machine to switch states.
 
-Output nodes receive output messages, which can contain many output values, and select discrete output values for outgoing messages. 
+Output nodes receive output messages, which can contain many output values, and select the output value corresponding to the node name for outgoing messages. 
 
-THe nodes are connected in a multicast topology through junctions. All input nodes are connected to all condition nodes. All condition nodes are connected to all state nodes, and all state nodes are connected to all output nodes. There is a feedback path from all state node outputs back to all state node inputs, to pass transition messages.
+The nodes are connected in a multicast topology through junctions. All input nodes are connected to all condition nodes. All condition nodes are connected to all state nodes, and all state nodes are connected to all output nodes. There is a feedback path from all state node outputs back to all state node inputs, to pass transition messages.
+
+The nodes are self-contained, that is they don't rely on flow context or a configuration node to group them into any particular state machine instance. This allows the construction of composite and coupled state machines which may share inputs, conditions, and outputs, and may have a plurality of active states.
 
