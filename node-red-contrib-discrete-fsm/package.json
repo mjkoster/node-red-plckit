@@ -11,7 +11,8 @@
   "node-red" : {
     "nodes": {
       "input": "input.js",
-      "condition": "condition.js"
+      "condition": "condition.js",
+      "output": "output.js"
     }
   },
   "dependencies": {
