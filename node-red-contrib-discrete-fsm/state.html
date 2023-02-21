@@ -49,6 +49,7 @@
       var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
       outputdata.editableList({
         addItem: function(container,index,item) {
+
           container.css({
               overflow: 'hidden',
               whiteSpace: 'nowrap'
@@ -69,8 +70,8 @@
               .appendTo(row)
               .typedInput({types:['str','num','bool']});
           
-          outputName.typedInput('value',"");
-          outputValue.typedInput('value',null);
+          outputName.typedInput('value',item.name || "");
+          outputValue.typedInput('value',item.value || null);
         },
         removable: true,
         sortable: true
@@ -79,6 +80,7 @@
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
         addItem: function(container,index,item) {
+
           container.css({
               overflow: 'hidden',
               whiteSpace: 'nowrap'
@@ -102,9 +104,9 @@
               .css("width","calc(50% - 30px)")
               .appendTo(row)
               .typedInput({types:['str']});
-              
-          conditionName.typedInput('value',"");
-          stateName.typedInput('value',"");
+
+          conditionName.typedInput('value',item.condition || "");
+          stateName.typedInput('value',item.state || "");
         },
         removable: true,
         sortable: true
