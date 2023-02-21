@@ -11,6 +11,15 @@ module.exports = function(RED) {
     node.transitions = config.transitions;
     node.context().set('isCurrentState', node.isinitialstate?true:false);
 
+    if (node.isinitialstate) {
+      setTimeout( function() {
+        var msg = {}
+        msg['topic'] = 'init';
+        msg.payload = node.outputvector;
+        node.send(msg);
+      }, 100 );
+    }
+
     node.on('input', function(msg) {
       var condition = msg.payload;
       if(msg.topic == 'condition' && node.context().get(isCurrentState) && condition in node.transitions) {
