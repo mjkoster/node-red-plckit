@@ -49,7 +49,6 @@
       var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
       outputdata.editableList({
         addItem: function(container,index,item) {
-
           container.css({
             overflow: 'hidden',
             whiteSpace: 'nowrap'
@@ -78,11 +77,10 @@
       });
       for (var output in this.outputVector) {
         outputdata.editableList('addItem', name:output, value:this.outputvector[output]);
-
+      };
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
         addItem: function(container,index,item) {
-
           container.css({
             overflow: 'hidden',
             whiteSpace: 'nowrap'
