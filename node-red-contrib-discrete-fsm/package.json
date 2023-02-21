@@ -12,6 +12,7 @@
     "nodes": {
       "input": "input.js",
       "condition": "condition.js",
+      "state": "state.js",
       "output": "output.js"
     }
   },

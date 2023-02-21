@@ -78,7 +78,7 @@
       for (var output in this.outputVector) {
         outputdata.editableList('addItem', name:output, value:this.outputvector[output]);
       };
-      
+
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
         addItem: function(container,index,item) {
@@ -121,7 +121,7 @@
 
       var items = $("#node-input-outputdata-container").editableList('items');
 
-      items.each(function(i) {
+      items.each(function() {
         var item = $(this);
         var outputName = item.find(".node-input-output-name").typedInput('value');
         var outputValue = item.find(".node-input-output-value").typedInput('value');
@@ -130,7 +130,7 @@
 
       var items = $("#node-input-transitiondata-container").editableList('items');
 
-      items.each(function(i) {
+      items.each(function() {
         var item = $(this);
         var conditionName = item.find(".node-input-condition-name").typedInput('value');
         var transitionName = item.find(".node-input-transition-name").typedInput('value');
