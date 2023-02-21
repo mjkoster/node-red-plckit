@@ -30,19 +30,19 @@
     category: 'DiscreteFSM',
     color: '#3FADB5',
     defaults: {
-        name: {value: ""},
-        isInitialState: {value:false},
-        outputVector: {value: {}}},
-        transitions: {value: {}}
+      name: {value: ""},
+      isInitialState: {value:false},
+      outputVector: {value: {}},
+      transitions: {value: {}}
     },
     inputs:1,
     outputs:1,
     icon: "font-awesome/fa-cogs",
     label: function() {
-        return this.name||"state";
+      return this.name||"state";
     },
     labelStyle: function() {
-        return this.name?"node_label_italic":"";
+      return this.name?"node_label_italic":"";
     },
     oneditprepare: function() {
 
@@ -51,24 +51,24 @@
         addItem: function(container,index,item) {
 
           container.css({
-              overflow: 'hidden',
-              whiteSpace: 'nowrap'
+            overflow: 'hidden',
+            whiteSpace: 'nowrap'
           });
           var row = $('<div/>').appendTo(container);
 
           var outputName = $('<input/>',{class:"node-input-output-name",type:"text"})
-              .css("width","25%")
-              .appendTo(row)
-              .typedInput({types:['str']});
+            .css("width","25%")
+            .appendTo(row)
+            .typedInput({types:['str']});
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
-              .text('=')
-              .appendTo(row);
+            .text('=')
+            .appendTo(row);
 
           var outputValue = $('<input/>',{class:"node-input-output-value",type:"text"})
-              .css("width","calc(75% - 30px)")
-              .appendTo(row)
-              .typedInput({types:['str','num','bool']});
+            .css("width","calc(75% - 30px)")
+            .appendTo(row)
+            .typedInput({types:['str','num','bool']});
           
           outputName.typedInput('value',item.name || "");
           outputValue.typedInput('value',item.value || null);
@@ -76,34 +76,36 @@
         removable: true,
         sortable: true
       });
+      for (item in this.outputVector) {
+        outputdata.editableList('addItem', item);
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
         addItem: function(container,index,item) {
 
           container.css({
-              overflow: 'hidden',
-              whiteSpace: 'nowrap'
+            overflow: 'hidden',
+            whiteSpace: 'nowrap'
           });
           var row = $('<div/>').appendTo(container);
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
-              .text('on condition')
-              .appendTo(row);
+            .text('on condition')
+            .appendTo(row);
 
           var conditionName = $('<input/>',{class:"node-input-condition-name",type:"text"})
-              .css("width","50%")
-              .appendTo(row)
-              .typedInput({types:['str']});
+            .css("width","50%")
+            .appendTo(row)
+            .typedInput({types:['str']});
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
-              .text('transition to')
-              .appendTo(row);
+            .text('transition to')
+            .appendTo(row);
 
           var stateName = $('<input/>',{class:"node-input-state-name",type:"text"})
-              .css("width","calc(50% - 30px)")
-              .appendTo(row)
-              .typedInput({types:['str']});
+            .css("width","calc(50% - 30px)")
+            .appendTo(row)
+            .typedInput({types:['str']});
 
           conditionName.typedInput('value',item.condition || "");
           stateName.typedInput('value',item.state || "");
@@ -111,6 +113,9 @@
         removable: true,
         sortable: true
       });
+      for (item in this.transitions) {
+        transitiondata.editableList('addItem', item);
+      }
     },
 
     oneditsave: function() {
