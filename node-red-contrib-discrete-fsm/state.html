@@ -6,8 +6,8 @@
 
   <div class="form-row">
     <label>Initialize FSM to this State (check exactly one state node)</label>
-    <input type="checkbox" id="node-input-isinitial" style="display: inline-block; width: auto; vertical-align: top;">
-    <label for="node-input-isinitial">isInitialState</label>
+    <input type="checkbox" id="node-input-isinitialstate" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-isinitialstate">isInitialState</label>
   </div>
 
   <label>Output Vector</label>
@@ -31,8 +31,8 @@
     color: '#3FADB5',
     defaults: {
       name: {value: ""},
-      isInitialState: {value:false},
-      outputVector: {value: {}},
+      isinitialstate: {value:false},
+      outputvector: {value: {}},
       transitions: {value: {}}
     },
     inputs:1,
@@ -76,8 +76,8 @@
         removable: true,
         sortable: true
       });
-      for (item in this.outputVector) {
-        outputdata.editableList('addItem', item);
+      for (var output in this.outputVector) {
+        outputdata.editableList('addItem', name:output, value:this.outputvector[output]);
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
@@ -113,8 +113,8 @@
         removable: true,
         sortable: true
       });
-      for (item in this.transitions) {
-        transitiondata.editableList('addItem', item);
+      for (var condition in this.transitions) {
+        transitiondata.editableList('addItem', {condition:condition, state:this.transitions[condition]} );
       }
     },
 
@@ -126,7 +126,7 @@
         var item = $(this);
         var outputName = item.find(".node-input-output-name").typedInput('value');
         var outputValue = item.find(".node-input-output-value").typedInput('value');
-        this.outputVector[outputName] = outputValue;
+        this.outputvector[outputName] = outputValue;
       });
 
       var items = $("#node-input-transitiondata-container").editableList('items');
@@ -137,7 +137,6 @@
         var transitionName = item.find(".node-input-transition-name").typedInput('value');
         this.transitions[conditionName] = transitionName;
       });
-
     }
   });
 </script>
