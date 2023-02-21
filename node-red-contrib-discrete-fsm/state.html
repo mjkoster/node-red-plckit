@@ -32,7 +32,6 @@
     defaults: {
         name: {value: ""},
         isInitialState: {value:false},
-        isCurrentState: {value:false},
         outputVector: {value: {}}},
         transitions: {value: {}}
     },
@@ -69,6 +68,9 @@
               .css("width","calc(75% - 30px)")
               .appendTo(row)
               .typedInput({types:['str','num','bool']});
+          
+          outputName.typedInput('value',"");
+          outputValue.typedInput('value',null);
         },
         removable: true,
         sortable: true
@@ -87,7 +89,7 @@
               .text('on condition')
               .appendTo(row);
 
-          var transitionName = $('<input/>',{class:"node-input-condition-name",type:"text"})
+          var conditionName = $('<input/>',{class:"node-input-condition-name",type:"text"})
               .css("width","50%")
               .appendTo(row)
               .typedInput({types:['str']});
@@ -100,6 +102,9 @@
               .css("width","calc(50% - 30px)")
               .appendTo(row)
               .typedInput({types:['str']});
+              
+          conditionName.typedInput('value',"");
+          stateName.typedInput('value',"");
         },
         removable: true,
         sortable: true
@@ -115,7 +120,7 @@
         var outputName = item.find(".node-input-output-name").typedInput('value');
         var outputValue = item.find(".node-input-output-value").typedInput('value');
         this.outputVector[outputName] = outputValue;
-      };
+      });
 
       var items = $("#node-input-transitiondata-container").editableList('items');
 
@@ -124,7 +129,7 @@
         var conditionName = item.find(".node-input-condition-name").typedInput('value');
         var transitionName = item.find(".node-input-transition-name").typedInput('value');
         this.transitions[conditionName] = transitionName;
-      };
+      });
 
     }
   });
