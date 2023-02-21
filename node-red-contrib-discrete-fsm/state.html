@@ -33,8 +33,8 @@
         name: {value: ""},
         isInitialState: {value:false},
         isCurrentState: {value:false},
-        outputVector: {value: []},
-        transitions: {value: []}
+        outputVector: {value: {}}},
+        transitions: {value: {}}
     },
     inputs:1,
     outputs:1,
@@ -111,17 +111,20 @@
       var items = $("#node-input-outputdata-container").editableList('items');
 
       items.each(function(i) {
-            var item = $(this);
-            var output = {
-                outputName:item.find(".node-input-output-name").typedInput('value'),
-                outputValue:item.find(".node-input-output-value").typedInput('value')
-            };
-
-      this.outputVector = ;
+        var item = $(this);
+        var outputName = item.find(".node-input-output-name").typedInput('value');
+        var outputValue = item.find(".node-input-output-value").typedInput('value');
+        this.outputVector[outputName] = outputValue;
+      };
 
       var items = $("#node-input-transitiondata-container").editableList('items');
 
-      this.transitions = result;
+      items.each(function(i) {
+        var item = $(this);
+        var conditionName = item.find(".node-input-condition-name").typedInput('value');
+        var transitionName = item.find(".node-input-transition-name").typedInput('value');
+        this.transitions[conditionName] = transitionName;
+      };
 
     }
   });
