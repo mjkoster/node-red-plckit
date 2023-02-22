@@ -21,6 +21,7 @@
 
       var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
       outputdata.editableList({
+        addButton('Add Output');
         addItem: function(container,index,item) {
           container.css({
             overflow: 'hidden',
@@ -54,6 +55,7 @@
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
+        addButton('Add Transition');
         addItem: function(container,index,item) {
           container.css({
             overflow: 'hidden',
@@ -62,7 +64,7 @@
           var row = $('<div/>').appendTo(container);
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
-            .text('on condition')
+            .text('on')
             .appendTo(row);
 
           var conditionName = $('<input/>',{class:"node-input-condition-name",type:"text"})
@@ -71,11 +73,11 @@
             .typedInput({types:['str']});
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
-            .text('transition to')
+            .text('=>')
             .appendTo(row);
 
           var stateName = $('<input/>',{class:"node-input-state-name",type:"text"})
-            .css("width","calc(50% - 30px)")
+            .css("width","calc(50% - 50px)")
             .appendTo(row)
             .typedInput({types:['str']});
 
@@ -120,9 +122,9 @@
   </div>
 
   <div class="form-row">
-    <label>Initialize FSM to this State (check exactly one state node)</label>
+    <label>Initial State</label>
     <input type="checkbox" id="node-input-isinitialstate" style="display: inline-block; width: auto; vertical-align: top;">
-    <label for="node-input-isinitialstate">isInitialState</label>
+    <label for="node-input-isinitialstate">check exactly one node</label>
   </div>
 
   <label>Output Vector</label>
