@@ -9,7 +9,7 @@ module.exports = function(RED) {
     node.isinitialstate = config.isinitialstate;
     node.outputvector = config.outputvector;
     node.transitions = config.transitions;
-    node.context().set('isCurrentState', node.isinitialstate?true:false);
+    node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
     if (node.isinitialstate) {
       setTimeout( function() {
