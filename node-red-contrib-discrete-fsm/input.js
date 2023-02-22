@@ -12,7 +12,7 @@ module.exports = function(RED) {
           var msg = {}
           msg['topic'] = 'init';
           msg['payload'] = {};
-          msg.payload[node.name] = node.initialvalue;
+          msg.payload[node.name] = false;
           node.send(msg);
         }, 100 );
 
