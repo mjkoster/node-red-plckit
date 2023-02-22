@@ -4,7 +4,8 @@
       color: '#3FADB5',
       defaults: {
           name: {value:""},
-          initialvalue: {value:null}
+          initialvalue: {value:null},
+          initialvaluetype: {value:""}
       },
       inputs:1,
       outputs:1,
@@ -19,7 +20,7 @@
         $("#node-input-initialvalue").typedInput({
         type:"bool",
         types:["str","num","bool"],
-        typeField: "#node-input-initialvalue-type"
+        typeField: "#node-input-initialvaluetype"
         })
       }
   });
@@ -33,7 +34,7 @@
   <div class="form-row">
     <label for="node-input-initialvalue"><i class="fa fa-pencil-square-o"></i> Initial Value</label>
     <input type="text" id="node-input-initialvalue" placeholder="Initial value">
-    <input type="hidden" id="node-input-initialvalue-type">
+    <input type="hidden" id="node-input-initialvaluetype">
   </div>
 </script>
 
