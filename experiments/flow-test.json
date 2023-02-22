@@ -1,0 +1,337 @@
+[
+    {
+        "id": "5d7ab6b00876bc5f",
+        "type": "tab",
+        "label": "state machine test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "afc4bd8e83021baa",
+        "type": "junction",
+        "z": "5d7ab6b00876bc5f",
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "8040c3f34b6c9fa1",
+                "aad0b41049086a6e",
+                "799f345ed01d53d4"
+            ]
+        ]
+    },
+    {
+        "id": "ed44e00c89a819c6",
+        "type": "junction",
+        "z": "5d7ab6b00876bc5f",
+        "x": 380,
+        "y": 280,
+        "wires": [
+            [
+                "c09743a6a1763c0c",
+                "112a5e23a113dd83",
+                "1940fc25c8b106d7"
+            ]
+        ]
+    },
+    {
+        "id": "346e0d4318ba931b",
+        "type": "junction",
+        "z": "5d7ab6b00876bc5f",
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "290525f5d97ec6c3",
+                "fb68821b73c2fe80",
+                "020bf063db20ab2b",
+                "ed44e00c89a819c6"
+            ]
+        ]
+    },
+    {
+        "id": "112a5e23a113dd83",
+        "type": "state",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Desorbing",
+        "isinitialstate": false,
+        "outputvector": {},
+        "transitions": {},
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "346e0d4318ba931b"
+            ]
+        ]
+    },
+    {
+        "id": "d90848161b65861d",
+        "type": "input",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Start",
+        "initialvalue": "false",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "afc4bd8e83021baa"
+            ]
+        ]
+    },
+    {
+        "id": "cce5dc25560f9f94",
+        "type": "input",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Stop",
+        "initialvalue": "true",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "afc4bd8e83021baa"
+            ]
+        ]
+    },
+    {
+        "id": "c09743a6a1763c0c",
+        "type": "state",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Adsorbing",
+        "isinitialstate": false,
+        "outputvector": {},
+        "transitions": {},
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "346e0d4318ba931b",
+                "799f345ed01d53d4"
+            ]
+        ]
+    },
+    {
+        "id": "1940fc25c8b106d7",
+        "type": "state",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Stopped",
+        "isinitialstate": true,
+        "outputvector": {},
+        "transitions": {},
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "346e0d4318ba931b"
+            ]
+        ]
+    },
+    {
+        "id": "020bf063db20ab2b",
+        "type": "output",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Pump_Run",
+        "rbe": true,
+        "x": 710,
+        "y": 200,
+        "wires": [
+            [
+                "799f345ed01d53d4"
+            ]
+        ]
+    },
+    {
+        "id": "290525f5d97ec6c3",
+        "type": "output",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Desorb Valve",
+        "rbe": true,
+        "x": 710,
+        "y": 280,
+        "wires": [
+            [
+                "799f345ed01d53d4"
+            ]
+        ]
+    },
+    {
+        "id": "fb68821b73c2fe80",
+        "type": "output",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Adsorb Valve",
+        "rbe": true,
+        "x": 710,
+        "y": 240,
+        "wires": [
+            [
+                "799f345ed01d53d4"
+            ]
+        ]
+    },
+    {
+        "id": "aad0b41049086a6e",
+        "type": "condition",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Start",
+        "expression": "Start && !Stop",
+        "oninputtopic": true,
+        "onsynctopic": false,
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "ed44e00c89a819c6"
+            ]
+        ]
+    },
+    {
+        "id": "8040c3f34b6c9fa1",
+        "type": "condition",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Stop",
+        "expression": "Stop",
+        "oninputtopic": true,
+        "onsynctopic": false,
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "ed44e00c89a819c6",
+                "799f345ed01d53d4"
+            ]
+        ]
+    },
+    {
+        "id": "883c20d3e4855deb",
+        "type": "inject",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "d90848161b65861d"
+            ]
+        ]
+    },
+    {
+        "id": "94594c9fcbcb4ef0",
+        "type": "inject",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Stop",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 140,
+        "wires": [
+            [
+                "cce5dc25560f9f94"
+            ]
+        ]
+    },
+    {
+        "id": "799f345ed01d53d4",
+        "type": "debug",
+        "z": "5d7ab6b00876bc5f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "666f6af8a60d8ea7",
+        "type": "inject",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "d90848161b65861d"
+            ]
+        ]
+    },
+    {
+        "id": "b52dee2c45347f81",
+        "type": "inject",
+        "z": "5d7ab6b00876bc5f",
+        "name": "Stop",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "cce5dc25560f9f94"
+            ]
+        ]
+    }
+]
