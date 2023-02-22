@@ -1,30 +1,3 @@
-<script type="text/html" data-template-name="state">
-  <div class="form-row">
-      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-      <input type="text" id="node-input-name" placeholder="Name">
-  </div>
-
-  <div class="form-row">
-    <label>Initialize FSM to this State (check exactly one state node)</label>
-    <input type="checkbox" id="node-input-isinitialstate" style="display: inline-block; width: auto; vertical-align: top;">
-    <label for="node-input-isinitialstate">isInitialState</label>
-  </div>
-
-  <label>Output Vector</label>
-  <div class="form-row node-input-outputdata-container-row">
-    <ol id="node-input-outputdata-container"></ol>
-  </div>
-
-  <label>Transitions</label>
-  <div class="form-row node-input-transitiondata-container-row">
-    <ol id="node-input-transitiondata-container"></ol>
-  </div>
-</script>
-
-<script type="text/html" data-help-name="output">
-  <p>holds a FSM state, sets the output vector, and generates transitions in response to conditions</p>
-</script>
-
 <script type="text/javascript">
   RED.nodes.registerType('state',{
     category: 'DiscreteFSM',
@@ -76,7 +49,7 @@
         sortable: true
       });
       for (var output in this.outputVector) {
-        outputdata.editableList('addItem', name:output, value:this.outputvector[output]);
+        outputdata.editableList('addItem', {name:output, value:this.outputvector[output]} );
       };
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
@@ -121,7 +94,7 @@
 
       var items = $("#node-input-outputdata-container").editableList('items');
 
-      items.each(function() {
+      items.each(function(index) {
         var item = $(this);
         var outputName = item.find(".node-input-output-name").typedInput('value');
         var outputValue = item.find(".node-input-output-value").typedInput('value');
@@ -130,7 +103,7 @@
 
       var items = $("#node-input-transitiondata-container").editableList('items');
 
-      items.each(function() {
+      items.each(function(index) {
         var item = $(this);
         var conditionName = item.find(".node-input-condition-name").typedInput('value');
         var transitionName = item.find(".node-input-transition-name").typedInput('value');
@@ -139,4 +112,32 @@
     }
   });
 </script>
+
+<script type="text/html" data-template-name="state">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label>Initialize FSM to this State (check exactly one state node)</label>
+    <input type="checkbox" id="node-input-isinitialstate" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-isinitialstate">isInitialState</label>
+  </div>
+
+  <label>Output Vector</label>
+  <div class="form-row node-input-outputdata-container-row">
+    <ol id="node-input-outputdata-container"></ol>
+  </div>
+
+  <label>Transitions</label>
+  <div class="form-row node-input-transitiondata-container-row">
+    <ol id="node-input-transitiondata-container"></ol>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="output">
+  <p>holds a FSM state, sets the output vector, and generates transitions in response to conditions</p>
+</script>
+
 
