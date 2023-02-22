@@ -22,7 +22,7 @@ module.exports = function(RED) {
 
     node.on('input', function(msg) {
       var condition = msg.payload;
-      if(msg.topic == 'condition' && node.context().get(isCurrentState) && condition in node.transitions) {
+      if(msg.topic == 'condition' && node.context().get('isCurrentState') && condition in node.transitions) {
         msg.topic = 'transition';
         msg.payload = node.transitions[condition];
         node.send(msg);
