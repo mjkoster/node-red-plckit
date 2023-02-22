@@ -21,7 +21,7 @@
 
       var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
       outputdata.editableList({
-        addButton('Add Output');
+        addButton: 'Add Output',
         addItem: function(container,index,item) {
           container.css({
             overflow: 'hidden',
@@ -55,7 +55,7 @@
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
-        addButton('Add Transition');
+        addButton:'Add Transition',
         addItem: function(container,index,item) {
           container.css({
             overflow: 'hidden',
