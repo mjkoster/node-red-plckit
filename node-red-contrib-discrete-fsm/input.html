@@ -4,7 +4,7 @@
       color: '#3FADB5',
       defaults: {
           name: {value:""},
-          initialvalue: {value:null},
+          initialvalue: {value:false},
           initialvaluetype: {value:"bool"}
       },
       inputs:1,
@@ -18,9 +18,13 @@
       },
       oneditprepare: function() {
         $("#node-input-initialvalue").typedInput({
-        types:["str","num","bool"],
-        typeField: "#node-input-initialvaluetype"
+          default:this.initialvaluetype||'bool',  
+          types:["str","num","bool"],
+          typeField: "#node-input-initialvaluetype"
         });
+      },
+      oneditsave: function() {
+        this.initialvaluetype = $("#node-input-initialvalue").typedInput('type');
       }
   });
 </script>
