@@ -7,12 +7,8 @@ module.exports = function(RED) {
         
         node.name = config.name;
 
-        if (node.initialvaluetype == 'str') {
-            node.initialvalue = config.initialvalue;
-        } else {
-            node.initialvalue = eval(config.initialvalue);
-        }
-        
+        node.initialvalue = eval(config.initialvalue);
+
         setTimeout( function() {
           var msg = {}
           msg['topic'] = 'init';
