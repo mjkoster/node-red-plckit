@@ -56,7 +56,7 @@
         sortable: true
       });
       outputlist.forEach( function(output) {
-        transitiondata.editableList('addItem', output );
+        outputdata.editableList('addItem', output );
       });
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
@@ -88,8 +88,8 @@
             .appendTo(row)
             .typedInput({types:['str']});
 
-          conditionName.typedInput('value',item.condition || defaultTransition.condition);
-          stateName.typedInput('value',item.state || defaultTransition.state);
+          conditionName.typedInput('value', item.condition || defaultTransition.condition);
+          stateName.typedInput('value', item.state || defaultTransition.state);
         },
         removable: true,
         sortable: true
