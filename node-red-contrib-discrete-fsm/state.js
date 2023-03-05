@@ -8,13 +8,16 @@ module.exports = function(RED) {
     node.name = config.name;
     node.isinitialstate = config.isinitialstate;
 
+    node.outputlist = config.outputlist
+    node.transitionlist = config.transitionlist
+
     var outputs = {};
-    config.outputlist.forEach( function(output) {
+    node.outputlist.forEach( function(output) {
       outputs[output.name] = output.value;
     });
 
     var transitions = {};
-    config.transitionlist.forEach( function(transition) {
+    node.transitionlist.forEach( function(transition) {
       transitions[transition.condition] = transition.state;
     });
 
