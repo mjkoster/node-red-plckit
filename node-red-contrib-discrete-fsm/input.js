@@ -6,7 +6,16 @@ module.exports = function(RED) {
         var node = this;
         
         node.name = config.name;
-        node.initialvalue = config.initialvalue;
+
+        if (node.initialvaluetype == 'number') {
+            node.initialvalue = config.initialvalue + 0;
+        }
+        if (node.initialvaluetype == 'string') {
+            node.initialvalue = config.initialvalue + "";
+        }
+        if (node.initialvaluetype == 'bool') {
+            node.initialvalue = config.initialvalue && true;
+        }
 
         setTimeout( function() {
           var msg = {}
