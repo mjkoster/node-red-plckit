@@ -7,30 +7,39 @@ module.exports = function(RED) {
     
     node.name = config.name;
     node.isinitialstate = config.isinitialstate;
-    node.outputvector = config.outputvector;
-    node.transitions = config.transitions;
+
+    var outputs = {};
+    config.outputlist.forEach( function(output) {
+      outputs[output.name] = output.value;
+    });
+
+    var transitions = {};
+    config.transitionlist.forEach( function(transition) {
+      transitions[transition.condition] = transition.state;
+    });
+
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
     if (node.isinitialstate) {
       setTimeout( function() {
-        var msg = {}
+        var msg = {};
         msg['topic'] = 'init';
-        msg.payload = node.outputvector;
+        msg.payload = outputs;
         node.send(msg);
       }, 100 );
     }
 
     node.on('input', function(msg) {
       var condition = msg.payload;
-      if(msg.topic == 'condition' && node.context().get('isCurrentState') && condition in node.transitions) {
+      if(msg.topic == 'condition' && node.context().get('isCurrentState') && condition in transitions) {
         msg.topic = 'transition';
-        msg.payload = node.transitions[condition];
+        msg.payload = transitions[condition];
         node.send(msg);
       }
       if(msg.topic == 'transition' &&  msg.payload == node.name) {
         node.context().set('isCurrentState',true);
         msg.topic = 'output';
-        msg.payload = node.outputvector;
+        msg.payload = outputs;
         node.send(msg);
       }
     });

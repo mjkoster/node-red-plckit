@@ -1,12 +1,16 @@
 <script type="text/javascript">
+
+  const defaultOutput = {name: "", value: false, type: "bool"};
+  const defaultTransition = {condition: "", state: ""};
+
   RED.nodes.registerType('state',{
     category: 'DiscreteFSM',
     color: '#3FADB5',
     defaults: {
       name: {value: ""},
-      isinitialstate: {value:false},
-      outputvector: {value: {}},
-      transitions: {value: {}}
+      isinitialstate: {value: false},
+      outputlist: {value: [defaultOutput]},
+      transitionlist: {value: [defaultTransition]}
     },
     inputs:1,
     outputs:1,
@@ -22,14 +26,15 @@
       var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
       outputdata.editableList({
         addButton: 'Add Output',
-        addItem: function(container,index,item) {
+        addItem: function(container,index,itemspec) {
+          var item = itemspec || defaultOutput
           container.css({
             overflow: 'hidden',
             whiteSpace: 'nowrap'
           });
           var row = $('<div/>').appendTo(container);
 
-          var outputName = $('<input/>',{class:"node-input-output-name",type:"text"})
+          var outputName = $('<input/>',{class:"node-input-name",type:"text"})
             .css("width","25%")
             .appendTo(row)
             .typedInput({types:['str']});
@@ -38,25 +43,27 @@
             .text('=')
             .appendTo(row);
 
-          var outputValue = $('<input/>',{class:"node-input-output-value",type:"text"})
+          var outputValue = $('<input/>',{class:"node-input-value",type:"text"})
             .css("width","calc(75% - 30px)")
             .appendTo(row)
-            .typedInput({types:['str','num','bool']});
+            .typedInput({default:item.type || defaultOutput.type, types:['str','num','bool']});
           
-          outputName.typedInput('value',item.name || "");
-          outputValue.typedInput('value',item.value || null);
+          outputName.typedInput('value',item.name || defaultOutput.name);
+          outputValue.typedInput('value',item.value || defaultOutput.value);
+          // (default should do this) outputValue.typedInput('type', item.type || defaultOutput.type)
         },
         removable: true,
         sortable: true
       });
-      for (var output in this.outputvector) {
-        outputdata.editableList('addItem', {name:output, value:this.outputvector[output]} );
-      };
+      outputlist.forEach( function(output) {
+        transitiondata.editableList('addItem', output );
+      });
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
         addButton:'Add Transition',
-        addItem: function(container,index,item) {
+        addItem: function(container,index,itemspec) {
+          var item = itemspec || defaultTransition
           container.css({
             overflow: 'hidden',
             whiteSpace: 'nowrap'
@@ -67,7 +74,7 @@
             .text('on')
             .appendTo(row);
 
-          var conditionName = $('<input/>',{class:"node-input-condition-name",type:"text"})
+          var conditionName = $('<input/>',{class:"node-input-condition",type:"text"})
             .css("width","40%")
             .appendTo(row)
             .typedInput({types:['str']});
@@ -76,20 +83,20 @@
             .text('goto')
             .appendTo(row);
 
-          var stateName = $('<input/>',{class:"node-input-state-name",type:"text"})
+          var stateName = $('<input/>',{class:"node-input-state",type:"text"})
             .css("width","40%")
             .appendTo(row)
             .typedInput({types:['str']});
 
-          conditionName.typedInput('value',item.condition || "");
-          stateName.typedInput('value',item.state || "");
+          conditionName.typedInput('value',item.condition || defaultTransition.condition);
+          stateName.typedInput('value',item.state || defaultTransition.state);
         },
         removable: true,
         sortable: true
       });
-      for (var condition in this.transitions) {
-        transitiondata.editableList('addItem', {condition:condition, state:this.transitions[condition]} );
-      }
+      transitionlist.forEach( function(transition) {
+        transitiondata.editableList('addItem', transition );
+      });
     },
 
     oneditsave: function() {
@@ -98,18 +105,19 @@
 
       items.each(function(index) {
         var item = $(this);
-        var outputName = item.find(".node-input-output-name").typedInput('value');
-        var outputValue = item.find(".node-input-output-value").typedInput('value');
-        this.outputvector[outputName] = outputValue;
+        var name = item.find(".node-input-name").typedInput('value');
+        var value = item.find(".node-input-value").typedInput('value');
+        var type = item.find(".node-input-value").typedinput('type')
+        this.outputlist.push({name:name, value:value, type:type});
       });
 
       var items = $("#node-input-transitiondata-container").editableList('items');
 
       items.each(function(index) {
         var item = $(this);
-        var conditionName = item.find(".node-input-condition-name").typedInput('value');
-        var transitionName = item.find(".node-input-transition-name").typedInput('value');
-        this.transitions[conditionName] = transitionName;
+        var condition = item.find(".node-input-condition").typedInput('value');
+        var state = item.find(".node-input-state").typedInput('value');
+        this.transitionlist.push({condition:condition, state:state});
       });
     }
   });
@@ -138,8 +146,8 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="output">
-  <p>holds a FSM state, sets the output vector, and generates transitions in response to conditions</p>
+<script type="text/html" data-help-name="state">
+  <p>defines a FSM state, sets the output vector, and generates transitions in response to conditions</p>
 </script>
 
 
