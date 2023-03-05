@@ -8,15 +8,15 @@ module.exports = function(RED) {
         node.name = config.name;
 
         if (node.initialvaluetype == 'number') {
-            node.initialvalue = config.initialvalue + 0;
+            node.initialvalue = number(config.initialvalue);
         }
         if (node.initialvaluetype == 'string') {
-            node.initialvalue = config.initialvalue + "";
+            node.initialvalue = string(config.initialvalue);
         }
         if (node.initialvaluetype == 'bool') {
-            node.initialvalue = config.initialvalue && true;
+            node.initialvalue = bool(config.initialvalue);
         }
-        node.initialvalue = config.initialvalue && true;
+        node.initialvalue = bool(config.initialvalue);
 
         setTimeout( function() {
           var msg = {}
