@@ -16,7 +16,7 @@ module.exports = function(RED) {
         if (node.initialvaluetype == 'bool') {
             node.initialvalue = Boolean(config.initialvalue);
         }
-        node.initialvalue = Boolean(config.initialvalue);
+        node.initialvalue = config.initialvalue;
 
         setTimeout( function() {
           var msg = {}
