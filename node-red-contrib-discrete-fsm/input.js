@@ -7,17 +7,12 @@ module.exports = function(RED) {
         
         node.name = config.name;
 
-        if (node.initialvaluetype == 'number') {
-            node.initialvalue = Number(config.initialvalue);
+        if (node.initialvaluetype == 'str') {
+            node.initialvalue = config.initialvalue;
+        } else {
+            node.initialvalue = eval(config.initialvalue);
         }
-        if (node.initialvaluetype == 'string') {
-            node.initialvalue = String(config.initialvalue);
-        }
-        if (node.initialvaluetype == 'bool') {
-            node.initialvalue = Boolean(config.initialvalue);
-        }
-        node.initialvalue = config.initialvalue;
-
+        
         setTimeout( function() {
           var msg = {}
           msg['topic'] = 'init';
