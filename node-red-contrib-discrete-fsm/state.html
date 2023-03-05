@@ -55,9 +55,13 @@
         removable: true,
         sortable: true
       });
-      outputlist.forEach( function(output) {
-        outputdata.editableList('addItem', output );
-      });
+
+      for (var i=0; i<outputlist.length; i++) {
+        outputdata.editableList('addItem', outputList[i] );
+      }
+      //outputlist.forEach( function(output) {
+      //  outputdata.editableList('addItem', output );
+      //});
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
@@ -94,9 +98,12 @@
         removable: true,
         sortable: true
       });
-      transitionlist.forEach( function(transition) {
-        transitiondata.editableList('addItem', transition );
-      });
+      for (var i=0; i<transitionlist.length; i++) {
+        transitiondata.editableList('addItem', transitionlist[i] );
+      }
+      //transitionlist.forEach( function(transition) {
+      //  transitiondata.editableList('addItem', transition );
+      //});
     },
 
     oneditsave: function() {
