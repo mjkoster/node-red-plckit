@@ -28,6 +28,13 @@ module.exports = function(RED) {
 
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
+    setTimeout( function() {
+      var msg = {};
+      msg['topic'] = 'diag';
+      msg.payload = node.name;
+      node.send(msg);
+    }, 100 );
+
     if (node.isinitialstate) {
       setTimeout( function() {
         var msg = {};
