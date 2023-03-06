@@ -8,10 +8,8 @@ module.exports = function(RED) {
     node.name = config.name;
     node.isinitialstate = config.isinitialstate;
 
-    msg.payload=config.name;
-    node.send(msg);
-    //console.log(config.outputlist);
-    //console.log(config.transitionlist);
+    console.log(config.outputlist);
+    console.log(config.transitionlist);
 
     node.outputlist = config.outputlist
     node.transitionlist = config.transitionlist
