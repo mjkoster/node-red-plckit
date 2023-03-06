@@ -16,6 +16,12 @@ module.exports = function(RED) {
     node.outputlist = config.outputlist
     node.transitionlist = config.transitionlist
 
+    var msg = {};
+    msg['topic'] = 'diag';
+    msg.payload = node.name;
+    node.send(msg);
+
+
     var outputs = {};
     node.outputlist.forEach( function(output) {
       outputs[output.name] = output.value;
@@ -27,11 +33,6 @@ module.exports = function(RED) {
     });
 
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
-
-    var msg = {};
-    msg['topic'] = 'diag';
-    msg.payload = node.name;
-    node.send(msg);
 
     if (node.isinitialstate) {
       setTimeout( function() {
