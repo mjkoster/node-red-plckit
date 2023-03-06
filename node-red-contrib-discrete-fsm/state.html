@@ -23,6 +23,8 @@
     },
     oneditprepare: function() {
 
+      var node = this;
+
       var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
       outputdata.editableList({
         addButton: 'Add Output',
@@ -56,9 +58,9 @@
         sortable: true
       });
 
-      //this.outputlist.forEach( function(output) {
-      //  outputdata.editableList('addItem', output );
-      //});
+      node.outputlist.forEach( function(output) {
+        outputdata.editableList('addItem', output );
+      });
 
       var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
       transitiondata.editableList({
@@ -96,30 +98,30 @@
         sortable: true
       });
 
-      this.transitionlist.forEach( function(transition) {
+      node.transitionlist.forEach( function(transition) {
         transitiondata.editableList('addItem', transition );
       });
     },
 
     oneditsave: function() {
 
-      var items = $("#node-input-outputdata-container").editableList('items');
+      var node = this;
 
+      var items = $("#node-input-outputdata-container").editableList('items');
       items.each(function(index) {
         var item = $(this);
         var name = item.find(".node-input-name").typedInput('value');
         var value = item.find(".node-input-value").typedInput('value');
         var type = item.find(".node-input-value").typedinput('type')
-        this.outputlist.push({name:name, value:value, type:type});
+        node.outputlist.push({name:name, value:value, type:type});
       });
 
       var items = $("#node-input-transitiondata-container").editableList('items');
-
       items.each(function(index) {
         var item = $(this);
         var condition = item.find(".node-input-condition").typedInput('value');
         var state = item.find(".node-input-state").typedInput('value');
-        this.transitionlist.push({condition:condition, state:state});
+        node.transitionlist.push({condition:condition, state:state});
       });
     }
   });
