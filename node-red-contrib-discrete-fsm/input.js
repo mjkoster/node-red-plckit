@@ -6,8 +6,8 @@ module.exports = function(RED) {
         var node = this;
         
         node.name = config.name;
-
-        // node.initialvalue = eval(config.initialvalue); // the value is stored as string
+        
+        // the value is stored from the form as a string, recover the typed value
         node.initialvalue = RED.util.evaluateNodeProperty(config.initialvalue, config.initialvaluetype, node)
 
         setTimeout( function() {

@@ -8,6 +8,9 @@ module.exports = function(RED) {
     node.name = config.name;
     node.isinitialstate = config.isinitialstate;
 
+    console.log(config.outputlist);
+    console.log(config.transitionlist);
+    
     node.outputlist = config.outputlist
     node.transitionlist = config.transitionlist
 
