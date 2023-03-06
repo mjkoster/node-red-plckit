@@ -16,7 +16,7 @@ module.exports = function(RED) {
 
     var msg = {};
     msg['topic'] = 'diag';
-    msg.payload = config.name;
+    msg.payload = node.name;
     node.send(msg);
 
 
