@@ -8,7 +8,7 @@ module.exports = function(RED) {
     node.name = config.name;
     node.isinitialstate = config.isinitialstate;
 
-    node.debug(config.name);
+    console.log(config.name);
     //console.log(config.outputlist);
     //console.log(config.transitionlist);
 
