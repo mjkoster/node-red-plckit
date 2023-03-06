@@ -7,7 +7,8 @@ module.exports = function(RED) {
         
         node.name = config.name;
 
-        node.initialvalue = eval(config.initialvalue);
+        // node.initialvalue = eval(config.initialvalue); // the value is stored as string
+        node.initialvalue = RED.util.evaluateNodeProperty(config.initialvalue, config.initialvaluetype, node)
 
         setTimeout( function() {
           var msg = {}
