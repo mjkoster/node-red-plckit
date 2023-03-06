@@ -11,8 +11,8 @@ module.exports = function(RED) {
     //console.log(config.outputlist);
     //console.log(config.transitionlist);
 
-    node.outputlist = config.outputlist
-    node.transitionlist = config.transitionlist
+    //node.outputlist = config.outputlist
+    //node.transitionlist = config.transitionlist
 
     var msg = {};
     msg['topic'] = 'diag';
