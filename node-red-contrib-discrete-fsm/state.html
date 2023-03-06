@@ -37,7 +37,7 @@
           var outputName = $('<input/>',{class:"node-input-name",type:"text"})
             .css("width","25%")
             .appendTo(row)
-            .typedInput({types:['str']});
+            .typedInput({default:'str', types:['str']});
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
             .text('=')
@@ -56,7 +56,7 @@
         sortable: true
       });
 
-      outputlist.forEach( function(output) {
+      this.outputlist.forEach( function(output) {
         outputdata.editableList('addItem', output );
       });
 
@@ -78,7 +78,7 @@
           var conditionName = $('<input/>',{class:"node-input-condition",type:"text"})
             .css("width","40%")
             .appendTo(row)
-            .typedInput({types:['str']});
+            .typedInput({default:'str', types:['str']});
 
           $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
             .text('goto')
@@ -87,7 +87,7 @@
           var stateName = $('<input/>',{class:"node-input-state",type:"text"})
             .css("width","40%")
             .appendTo(row)
-            .typedInput({types:['str']});
+            .typedInput({default:'str', types:['str']});
 
           conditionName.typedInput('value', item.condition || defaultTransition.condition);
           stateName.typedInput('value', item.state || defaultTransition.state);
@@ -96,7 +96,7 @@
         sortable: true
       });
 
-      transitionlist.forEach( function(transition) {
+      this.transitionlist.forEach( function(transition) {
         transitiondata.editableList('addItem', transition );
       });
     },
