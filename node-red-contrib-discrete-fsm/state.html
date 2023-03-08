@@ -25,44 +25,7 @@
 
       var node = this;
 
-      var outputdata = $('#node-input-outputdata-container').css('min-height','120px').css('min-width','450px');
-      outputdata.editableList({
-        addButton: 'Add Output',
-        addItem: function(container,index,itemspec) {
-          var item = itemspec || defaultOutput
-          container.css({
-            overflow: 'hidden',
-            whiteSpace: 'nowrap'
-          });
-          var row = $('<div/>').appendTo(container);
-
-          var outputName = $('<input/>',{class:"node-input-name",type:"text"})
-            .css("width","25%")
-            .appendTo(row)
-            .typedInput({default:'str', types:['str']});
-
-          $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
-            .text('=')
-            .appendTo(row);
-
-          var outputValue = $('<input/>',{class:"node-input-value",type:"text"})
-            .css("width","calc(75% - 30px)")
-            .appendTo(row)
-            .typedInput({default:item.type || defaultOutput.type, types:['str','num','bool']});
-          
-          outputName.typedInput('value',item.name || defaultOutput.name);
-          outputValue.typedInput('value',item.value || defaultOutput.value);
-          // (default should do this) outputValue.typedInput('type', item.type || defaultOutput.type)
-        },
-        removable: true,
-        sortable: true
-      });
-
-      node.outputlist.forEach( function(output) {
-        outputdata.editableList('addItem', output );
-      });
-
-      var transitiondata = $('#node-input-transitiondata-container').css('min-height','120px').css('min-width','450px');
+      var transitiondata = $('#node-input-transitiondata-container').css('min-height','240px').css('min-width','450px');
       transitiondata.editableList({
         addButton:'Add Transition',
         addItem: function(container,index,itemspec) {
@@ -101,6 +64,44 @@
       node.transitionlist.forEach( function(transition) {
         transitiondata.editableList('addItem', transition );
       });
+      
+      var outputdata = $('#node-input-outputdata-container').css('min-height','240px').css('min-width','450px');
+      outputdata.editableList({
+        addButton: 'Add Output',
+        addItem: function(container,index,itemspec) {
+          var item = itemspec || defaultOutput
+          container.css({
+            overflow: 'hidden',
+            whiteSpace: 'nowrap'
+          });
+          var row = $('<div/>').appendTo(container);
+
+          var outputName = $('<input/>',{class:"node-input-name",type:"text"})
+            .css("width","25%")
+            .appendTo(row)
+            .typedInput({default:'str', types:['str']});
+
+          $('<div/>',{style: 'display:inline-block; padding:0px 6px;'})
+            .text('=')
+            .appendTo(row);
+
+          var outputValue = $('<input/>',{class:"node-input-value",type:"text"})
+            .css("width","calc(75% - 30px)")
+            .appendTo(row)
+            .typedInput({default:item.type || defaultOutput.type, types:['str','num','bool']});
+          
+          outputName.typedInput('value',item.name || defaultOutput.name);
+          outputValue.typedInput('value',item.value || defaultOutput.value);
+          // (default should do this) outputValue.typedInput('type', item.type || defaultOutput.type)
+        },
+        removable: true,
+        sortable: true
+      });
+
+      node.outputlist.forEach( function(output) {
+        outputdata.editableList('addItem', output );
+      });
+
     },
 
     oneditsave: function() {
