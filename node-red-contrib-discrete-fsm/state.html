@@ -64,7 +64,7 @@
       node.transitionlist.forEach( function(transition) {
         transitiondata.editableList('addItem', transition );
       });
-      
+
       var outputdata = $('#node-input-outputdata-container').css('min-height','240px').css('min-width','450px');
       outputdata.editableList({
         addButton: 'Add Output',
@@ -140,16 +140,16 @@
     <label for="node-input-isinitialstate">one node</label>
   </div>
 
-  <label>Outputs</label>
-  <div class="form-row node-input-outputdata-container-row">
-    <ol id="node-input-outputdata-container"></ol>
-  </div>
-
   <label>Transitions</label>
   <div class="form-row node-input-transitiondata-container-row">
     <ol id="node-input-transitiondata-container"></ol>
   </div>
 </script>
+
+<label>Outputs</label>
+<div class="form-row node-input-outputdata-container-row">
+  <ol id="node-input-outputdata-container"></ol>
+</div>
 
 <script type="text/html" data-help-name="state">
   <p>defines a FSM state, sets the output vector, and generates transitions in response to conditions</p>
