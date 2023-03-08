@@ -25,7 +25,7 @@
 
       var node = this;
 
-      var outputdata = $('#node-input-outputdata-container').css('min-height','240px').css('min-width','450px');
+      var outputdata = $('#node-input-outputdata-container').css('min-height','180px').css('min-width','450px');
       outputdata.editableList({
         addButton: 'Add Output',
         addItem: function(container,index,itemspec) {
@@ -58,11 +58,7 @@
         sortable: true
       });
 
-      node.outputlist.forEach( function(output) {
-        outputdata.editableList('addItem', output );
-      });
-
-      var transitiondata = $('#node-input-transitiondata-container').css('min-height','240px').css('min-width','450px');
+      var transitiondata = $('#node-input-transitiondata-container').css('min-height','180px').css('min-width','450px');
       transitiondata.editableList({
         addButton:'Add Transition',
         addItem: function(container,index,itemspec) {
@@ -98,6 +94,10 @@
         sortable: true
       });
 
+      node.outputlist.forEach( function(output) {
+        outputdata.editableList('addItem', output );
+      });
+      
       node.transitionlist.forEach( function(transition) {
         transitiondata.editableList('addItem', transition );
       });
