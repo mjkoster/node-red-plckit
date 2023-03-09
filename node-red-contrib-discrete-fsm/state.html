@@ -108,9 +108,9 @@
 
       var node = this;
 
-      var items = $("#node-input-outputdata-container").editableList('items');
+      var outputitems = $("#node-input-outputdata-container").editableList('items');
 
-      items.each(function(index) {
+      outputitems.each(function(index) {
         var item = $(this);
         var name = item.find(".node-input-name").typedInput('value');
         var value = item.find(".node-input-value").typedInput('value');
@@ -118,8 +118,8 @@
         node.outputlist.push({name:name, value:value, type:type});
       });
       
-      var items = $("#node-input-transitiondata-container").editableList('items');
-      items.each(function(index) {
+      var transitionitems = $("#node-input-transitiondata-container").editableList('items');
+      transitionitems.each(function(index) {
         var item = $(this);
         var condition = item.find(".node-input-condition").typedInput('value');
         var state = item.find(".node-input-state").typedInput('value');
