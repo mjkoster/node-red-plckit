@@ -12,7 +12,7 @@ module.exports = function(RED) {
 
     var outputs = {};
     node.outputlist.forEach( function(output) {
-      outputs[output.name] = output.value;
+      outputs[output.name] = RED.util.evaluateNodeProperty(output.value,output.type,node);
     });
 
     var transitions = {};
@@ -20,6 +20,7 @@ module.exports = function(RED) {
       transitions[transition.condition] = transition.state;
     });
 
+    node.status({});
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
     if (node.isinitialstate) {

@@ -115,7 +115,6 @@
         var name = item.find(".node-input-name").typedInput('value');
         var value = item.find(".node-input-value").typedInput('value');
         var type = item.find(".node-input-value").typedInput('type')
-        value = RED.util.evaluateNodeProperty(value,type,node)
         node.outputlist.push({name:name, value:value, type:type});
       });
 
