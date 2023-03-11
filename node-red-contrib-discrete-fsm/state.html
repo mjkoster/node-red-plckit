@@ -108,8 +108,9 @@
 
       var node = this;
 
-      var outputitems = $("#node-input-outputdata-container").editableList('items');
+      RED.log.debug("Edit Save");
 
+      var outputitems = $("#node-input-outputdata-container").editableList('items');
       outputitems.each(function(index) {
         var item = $(this);
         var name = item.find(".node-input-name").typedInput('value');
