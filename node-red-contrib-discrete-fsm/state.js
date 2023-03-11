@@ -20,9 +20,9 @@ module.exports = function(RED) {
       transitions[transition.condition] = transition.state;
     });
 
-    RED.log.debug("Node Init");
-    RED.log.debug(outputs);
-    RED.log.debug(transitions);
+    console.log("Node Init");
+    console.log(outputs);
+    console.log(transitions);
 
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
