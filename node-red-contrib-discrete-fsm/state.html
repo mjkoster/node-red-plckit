@@ -110,6 +110,7 @@
 
       var outputitems = $("#node-input-outputdata-container").editableList('items');
       outputitems.each(function(index) {
+        node.outputlist = [];
         var item = $(this);
         var name = item.find(".node-input-name").typedInput('value');
         var value = item.find(".node-input-value").typedInput('value');
@@ -119,6 +120,7 @@
 
       var transitionitems = $("#node-input-transitiondata-container").editableList('items');
       transitionitems.each(function(index) {
+        node.transitionlist = [];
         var item = $(this);
         var condition = item.find(".node-input-condition").typedInput('value');
         var state = item.find(".node-input-state").typedInput('value');
