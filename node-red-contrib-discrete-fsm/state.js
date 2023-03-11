@@ -20,7 +20,9 @@ module.exports = function(RED) {
       transitions[transition.condition] = transition.state;
     });
 
-    console.log("Node Init");
+    console.log("State Node Init");
+    console.log(node.name)
+    console.log(isInitialState)
     console.log(outputs);
     console.log(transitions);
 
