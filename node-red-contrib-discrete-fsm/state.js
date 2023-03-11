@@ -22,7 +22,7 @@ module.exports = function(RED) {
 
     console.log("State Node Init");
     console.log(node.name)
-    console.log(isInitialState)
+    console.log(node.isinitialstate)
     console.log(outputs);
     console.log(transitions);
 
