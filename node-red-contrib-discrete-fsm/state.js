@@ -42,6 +42,7 @@ module.exports = function(RED) {
       if(msg.topic == 'condition' && node.context().get('isCurrentState') && condition in transitions) {
         msg.topic = 'transition';
         msg.payload = transitions[condition];
+        node.context().set('isCurrentState',false);
         node.send(msg);
       }
       if(msg.topic == 'transition' &&  msg.payload == node.name) {
