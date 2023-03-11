@@ -20,6 +20,8 @@ module.exports = function(RED) {
       transitions[transition.condition] = transition.state;
     });
 
+    RED.log.debug("Node Init");
+
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
     if (node.isinitialstate) {
