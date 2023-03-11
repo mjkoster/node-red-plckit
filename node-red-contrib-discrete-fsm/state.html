@@ -22,7 +22,6 @@
       return this.name?"node_label_italic":"";
     },
     oneditprepare: function() {
-      console.log("Edit Prepare");
 
       var node = this;
 
@@ -109,8 +108,6 @@
 
       var node = this;
 
-      //RED.log.debug("Edit Save");
-
       var outputitems = $("#node-input-outputdata-container").editableList('items');
       outputitems.each(function(index) {
         var item = $(this);
@@ -118,7 +115,6 @@
         var value = item.find(".node-input-value").typedInput('value');
         var type = item.find(".node-input-value").typedinput('type')
         node.outputlist.push({name:name, value:value, type:type});
-        //RED.log.debug({name:name, value:value, type:type});
       });
 
       var transitionitems = $("#node-input-transitiondata-container").editableList('items');
@@ -127,7 +123,6 @@
         var condition = item.find(".node-input-condition").typedInput('value');
         var state = item.find(".node-input-state").typedInput('value');
         node.transitionlist.push({condition:condition, state:state});
-        //RED.log.debug({condition:condition, state:state});
       });
     }
   });

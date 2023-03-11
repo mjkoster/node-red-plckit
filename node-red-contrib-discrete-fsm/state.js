@@ -21,6 +21,8 @@ module.exports = function(RED) {
     });
 
     RED.log.debug("Node Init");
+    RED.log.debug(node.outputlist);
+    RED.log.debug(node.transitionlist);
 
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
