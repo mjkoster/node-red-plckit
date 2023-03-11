@@ -18,6 +18,16 @@ module.exports = function(RED) {
           node.send(msg);
         }, 100 );
 
+        if (typeof(node.initialvalue) == 'boolean') {
+            if (node.initialvalue == true) {
+                node.status({fill:"green",shape:"dot",text:"true"});
+            } else {
+                node.status({fill:"green",shape:"ring",text:"false"});
+            }
+        } else {
+            node.status({});
+        }
+
         node.on('input', function(msg) {
             const value = msg.payload;
             if (typeof(value) == 'boolean') {

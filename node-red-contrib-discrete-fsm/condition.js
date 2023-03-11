@@ -12,8 +12,8 @@ module.exports = function(RED) {
         node.expression = config.expression;
         node.oninputtopic = config.oninputtopic;
         node.onsynctopic = config.onsynctopic;
-        
-        node.status({fill:"green",shape:"ring",text:"true"});
+
+        node.status({fill:"green",shape:"ring",text:"false"});
 
         node.on('input', function(msg) {
             if ( msg.topic == "input" || msg.topic == "init" ) {
@@ -33,7 +33,7 @@ module.exports = function(RED) {
                     msg.payload = node.name;
                     node.send(msg);
                 } else {
-                    node.status({fill:"green",shape:"ring",text:"true"});
+                    node.status({fill:"green",shape:"ring",text:"false"});
                 }
             }
         });
