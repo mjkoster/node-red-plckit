@@ -29,6 +29,7 @@ module.exports = function(RED) {
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
     if (node.isinitialstate) {
+      node.status({fill:"green",shape:"dot",text:"active"});
       setTimeout( function() {
         var msg = {};
         msg['topic'] = 'init';
@@ -43,10 +44,12 @@ module.exports = function(RED) {
         msg.topic = 'transition';
         msg.payload = transitions[condition];
         node.context().set('isCurrentState',false);
+        node.status({});
         node.send(msg);
       }
       if(msg.topic == 'transition' &&  msg.payload == node.name) {
         node.context().set('isCurrentState',true);
+        node.status({fill:"green",shape:"dot",text:"active"});
         msg.topic = 'output';
         msg.payload = outputs;
         node.send(msg);
