@@ -23,8 +23,8 @@ module.exports = function(RED) {
     console.log("State Node Init");
     console.log(node.name)
     console.log(node.isinitialstate)
-    console.log(outputs);
-    console.log(transitions);
+    console.log(node.outputlist);
+    console.log(node.transitionlist);
 
     node.context().set('isCurrentState', ( node.isinitialstate ? true : false) );
 
