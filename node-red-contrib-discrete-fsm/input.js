@@ -20,6 +20,15 @@ module.exports = function(RED) {
 
         node.on('input', function(msg) {
             const value = msg.payload;
+            if (typeof(value) == 'boolean') {
+                if (value == true) {
+                    node.status({fill:"green",shape:"dot",text:"true"});
+                } else {
+                    node.status({fill:"green",shape:"ring",text:"false"});
+                }
+            } else {
+                node.status({});
+            }
             msg.payload = {};
             msg.topic = "input";
             msg.payload[node.name] = value;
