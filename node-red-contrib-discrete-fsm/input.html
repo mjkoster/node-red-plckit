@@ -41,6 +41,31 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="input">
-  <p>Receives an input value in a payload and sends it as a key value pair using the node name as key</p>
+<script type="text/markdown" data-help-name="input">
+## Input Node
+Recieves input data and sends to Condition nodes
+
+### Inputs
+#### Topic
+#### Payload
+- boolean, string, or number type
+
+### Outputs
+#### Topic 
+- <code>init</code> initializes the downstream Condition nodes with the initial value
+- <code>input</code> sends received input value to Condition nodes
+
+#### Payload
+- object type with <code>node.name</code> as key and input value or initial value
+
+### Details
+Input nodes receive values from the Node-RED application, associate values with a data types, and transmit named value records to Condition nodes using a message topic of "input", to be evaluated in the Condition nodes. 
+
+Input nodes are configured with initial values in order to start the state machine with a known set of Conditions. During flow initialization, the Input nodes transmit initial values to the Condition nodes, using a message with a topic of "init".
+
+### Settings
+#### Initial Value
+- Provides an initial type and value to the downstream Condition node. The type may be Boolean, Number, or String
+
+### References
 </script>
