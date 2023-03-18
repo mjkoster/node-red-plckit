@@ -31,6 +31,23 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="output">
-  <p>parses massages with 'output' topic and extracts the value correspnding to the node name</p>
+<script type="text/markdown" data-help-name="output">## Output Node
+Recieves Output messages from State nodes and sends output values to downstream nodes
+
+### Inputs
+#### Topic
+- <code>init</code> When an init message is received, the Output node stores the value and sends a message consisting of the value to the downstream application node(s)
+
+- <code>output</code> When an init message is received, the Output node stores the value and sends a message consisting of the value to the downstream application node(s) if rbe is not checked, or if RBE is checked and the new value is different from the last stored value.
+
+### Outputs
+#### Topic
+- The topic of a message sent from an Output node is undefined
+#### Payload
+- The payload from an Output node consists of a JSON representation of the plain boolean, nomber, or string value
+
+### Details
+OUtput nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+
+### References
 </script>
