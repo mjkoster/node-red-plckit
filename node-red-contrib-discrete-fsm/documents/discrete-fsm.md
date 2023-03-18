@@ -56,7 +56,7 @@ Recieves input data and sends to Condition nodes
 - <code>input</code> sends received input value to Condition nodes
 
 #### Payload
-- object type with <code>node.name</code> as key and input value or initial value
+- <code>init</code> and <code>input</code> object type with <code>node.name</code> as key and input value or initial value
 
 ### Details
 Input nodes receive values from the Node-RED application, associate values with a data types, and transmit named value records to Condition nodes using a message topic of "input", to be evaluated in the Condition nodes. 
@@ -156,6 +156,9 @@ Recieves Output messages from State nodes and sends output values to downstream 
 - <code>init</code> When an init message is received, the Output node stores the value and sends a message consisting of the value to the downstream application node(s)
 
 - <code>output</code> When an init message is received, the Output node stores the value and sends a message consisting of the value to the downstream application node(s) if rbe is not checked, or if RBE is checked and the new value is different from the last stored value.
+
+#### Payload
+- <code>init</code and <code>output</code> object type with <code>node.name</code> as keys and output values or initial values
 
 ### Outputs
 #### Topic
