@@ -1,4 +1,9 @@
 # node-red-contrib-discrete-fsm
+## Install
+<code> npm install node-red-contrib-discrete-fsm </code>
+
+or use the Node-RED palette manager and serach for <code>discrete-fsm</code>
+
 ## What it is
 
 This is a set of Node-RED nodes that implements Finite State Machines (FSM). Each Input, Output, Condition, and State of the FSM is modeled as a discrete node in a Node-RED flow. 
@@ -13,32 +18,16 @@ The names of the individual nodes are used as symbolic names for the Inputs, Con
 
 ## How it works
 ### Input Nodes
-Input nodes receive values from the Node-RED application, associate values with their data types, and transmit named value records to Condition nodes using a message topic of "input", to be evaluated in the Condition nodes. 
-
-Input nodes are configured with initial values in order to start the state machine with a known set of Conditions. During flow initialization, the Input nodes transmit initial values to the Condition nodes, using a message with a topic of "init".
+Input nodes receive raw input values and transmit JSON formatted update records to Condition nodes. During startup, Input nodes transmit initial values to the Condition nodes to establish a starting Condition.
 
 ### Condition Nodes
-Condition nodes receive named Input value records from Input nodes, retain most recent Input values, and evaluate Input values against a mathjs expression that yields a boolean result. 
-
-The evaluation of input values can be either asynchronous, on every recieved value, or synchronous, when a message with a topic of "sync" is received.
-
-When a Condition evaluates to logic true, a message is sent to the State nodes with a topic of "condition" and a payload containing the name of the condition.
+Condition nodes receive input values from Input nodes and evaluate logic expressions across a set of input values. Condition nodes emit messages when conditions become true.
 
 ### State Nodes
-State nodes receive Condition messages, and the Conditions are checked against the transition table for the currently active State. When a Condition occurs that is mapped to a transition from the current State, a message is sent using the topic "transition", and containing the name of the new State, in order to hand off the active state role to the new state.
-
-The transition topic messages are looped back to the State node inputs, where the new State selects itself by matching the State name in the transition message with its own node name. Sometimes there is a transition to the same state. In this case, there is normally no transition message sent, and no output message sent.
-
-State nodes are configured with an Output vector, from which the output values are set when the State is entered, and a transition table, which defines transitions from this state to other states based on Condition messages.
-
-When a new State is entered, the Output vector is sent to the Output nodes in a message including the names of the Outputs and their respective values.
-
-One State is designated as the initial state. The initial state's Output vector sets the Outputs to their initial values during flow initialization, using a message with the topic "init".
+State nodes receive Condition messages and activate pre-defined state transitions when Conditions become true. State nodes transmit the pre-defined set of output values for each State to the Output nodes upon state transitions. Exactly one State node is configured as the initial state. 
 
 ### Output Nodes
-Output nodes receive the Output vector from State nodes, retain and transmit the value corresponding to their node name as a plain value to the downstream node(s) in the application flow. 
-
-Output nodes normally Report By Exception (RBE), that is to only send a message when the value changes. This prevents redundant updates in the system when two successive states set the same value on an output.
+Output nodes receive the output vector from State nodes, and each Output node transmits one pre-selected output value to the downstream node(s) in the application flow. 
 
 ## Topics
 | Topic | Explanation |
@@ -155,7 +144,7 @@ The transition message loops back to the inputs of all State nodes, where each S
 - All of the Outputs affected by transition to this State are assigned values in this setting. There is one entry in the form to begin with (A state should affect at least one output) and additional Outputs may be added by clicking  the "+ Add Output" button. Each entry defines the Value for one OUtput.
 
 #### Transitions
-- This is where the Transitions from this State to other States are defined. There is one entry in the form to begin with (A State should have at least one transition to another State) and additional transitions may be defined by clicking the "+ Add Transition" button. Each entry defines a Condition and a State to transition to when the OCndition becomes True.
+- This is where the Transitions from this State to other States are defined. There is one entry in the form to begin with (A State should have at least one transition to another State) and additional transitions may be defined by clicking the "+ Add Transition" button. Each entry defines a Condition and a State to transition to when the Condition becomes True.
 
 ### References
 
@@ -175,6 +164,10 @@ Recieves Output messages from State nodes and sends output values to downstream 
 - The payload from an Output node consists of a JSON representation of the plain boolean, nomber, or string value
 
 ### Details
-OUtput nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+Output nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+
+### Settings
+#### rbe
+- Report By Exception should normally be checked. It supresses the output message when the state machine transitions to a state and the output value doesn't change. In some applications, it's useful to send an output message even if the value doesn't change.
 
 ### References
