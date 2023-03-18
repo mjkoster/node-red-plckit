@@ -47,7 +47,11 @@ Recieves Output messages from State nodes and sends output values to downstream 
 - The payload from an Output node consists of a JSON representation of the plain boolean, nomber, or string value
 
 ### Details
-OUtput nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+Output nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+
+### Settings
+#### rbe
+- Report By Exception should normally be checked. It supresses the output message when the state machine transitions to a state and the output value doesn't change. In some applications, it's useful to send an output message even if the value doesn't change.
 
 ### References
 </script>

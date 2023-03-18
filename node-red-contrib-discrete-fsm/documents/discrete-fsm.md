@@ -144,7 +144,7 @@ The transition message loops back to the inputs of all State nodes, where each S
 - All of the Outputs affected by transition to this State are assigned values in this setting. There is one entry in the form to begin with (A state should affect at least one output) and additional Outputs may be added by clicking  the "+ Add Output" button. Each entry defines the Value for one OUtput.
 
 #### Transitions
-- This is where the Transitions from this State to other States are defined. There is one entry in the form to begin with (A State should have at least one transition to another State) and additional transitions may be defined by clicking the "+ Add Transition" button. Each entry defines a Condition and a State to transition to when the OCndition becomes True.
+- This is where the Transitions from this State to other States are defined. There is one entry in the form to begin with (A State should have at least one transition to another State) and additional transitions may be defined by clicking the "+ Add Transition" button. Each entry defines a Condition and a State to transition to when the Condition becomes True.
 
 ### References
 
@@ -164,6 +164,10 @@ Recieves Output messages from State nodes and sends output values to downstream 
 - The payload from an Output node consists of a JSON representation of the plain boolean, nomber, or string value
 
 ### Details
-OUtput nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+Output nodes recieve output messages from State nodes, and select the output value within the output message that corresponds to the Output name, which is the same as the Output node name.
+
+### Settings
+#### rbe
+- Report By Exception should normally be checked. It supresses the output message when the state machine transitions to a state and the output value doesn't change. In some applications, it's useful to send an output message even if the value doesn't change.
 
 ### References
