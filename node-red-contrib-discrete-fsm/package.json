@@ -19,10 +19,10 @@
 	},
   "node-red" : {
     "nodes": {
-      "input": "input.js",
-      "condition": "condition.js",
-      "state": "state.js",
-      "output": "output.js"
+      "input": "nodes/input.js",
+      "condition": "nodes/condition.js",
+      "state": "nodes/state.js",
+      "output": "nodes/output.js"
     }
   },
   "dependencies": {
