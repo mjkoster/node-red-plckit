@@ -11,7 +11,7 @@
         "id": "9f0c183823043a90",
         "type": "switch",
         "z": "14899cc76b048f4b",
-        "name": "SEL",
+        "name": "Select",
         "property": "payload",
         "propertyType": "msg",
         "rules": [
@@ -51,7 +51,7 @@
         "id": "6b935b6ae56c5f11",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "RST",
+        "name": "Reset",
         "rules": [
             {
                 "t": "set",
@@ -153,12 +153,13 @@
         "id": "8d5569a0da17d579",
         "type": "debug",
         "z": "14899cc76b048f4b",
-        "name": "debug 1",
+        "name": "Off Delay",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
         "x": 1240,
@@ -169,7 +170,7 @@
         "id": "3ba3b59f6306acad",
         "type": "switch",
         "z": "14899cc76b048f4b",
-        "name": "SEL",
+        "name": "Select",
         "property": "payload",
         "propertyType": "msg",
         "rules": [
@@ -187,7 +188,7 @@
         "repair": false,
         "outputs": 3,
         "x": 570,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "a24d29050adbcbc7"
@@ -210,7 +211,7 @@
         "id": "a24d29050adbcbc7",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "RST",
+        "name": "Reset",
         "rules": [
             {
                 "t": "set",
@@ -226,7 +227,7 @@
         "to": "",
         "reg": false,
         "x": 710,
-        "y": 780,
+        "y": 840,
         "wires": [
             [
                 "346462a44b43829b"
@@ -251,7 +252,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 830,
-        "y": 780,
+        "y": 840,
         "wires": [
             [
                 "b02935ed85d585ba"
@@ -262,7 +263,7 @@
         "id": "f7d88babc250725c",
         "type": "function",
         "z": "14899cc76b048f4b",
-        "name": "gate",
+        "name": "Gate",
         "func": "if (msg.payload && context.get(\"timed\")) {\n    context.set(\"timed\", false);\n    return msg;\n} else if (!msg.payload && !context.get(\"timed\")) {\n    context.set(\"timed\", true);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
@@ -270,7 +271,7 @@
         "finalize": "",
         "libs": [],
         "x": 1090,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "df5bf8d7d97ee38e"
@@ -295,7 +296,7 @@
         "payload": "true",
         "payloadType": "bool",
         "x": 170,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "8365e482d59140c3"
@@ -320,7 +321,7 @@
         "payload": "false",
         "payloadType": "bool",
         "x": 170,
-        "y": 780,
+        "y": 840,
         "wires": [
             [
                 "8365e482d59140c3"
@@ -331,23 +332,24 @@
         "id": "df5bf8d7d97ee38e",
         "type": "debug",
         "z": "14899cc76b048f4b",
-        "name": "debug 2",
+        "name": "On Interval",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1240,
-        "y": 740,
+        "x": 1250,
+        "y": 800,
         "wires": []
     },
     {
         "id": "b02935ed85d585ba",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "OFF",
+        "name": "Off",
         "rules": [
             {
                 "t": "set",
@@ -363,7 +365,7 @@
         "to": "",
         "reg": false,
         "x": 950,
-        "y": 780,
+        "y": 840,
         "wires": [
             [
                 "f7d88babc250725c",
@@ -375,7 +377,7 @@
         "id": "9b7ce612371f8b05",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "RST",
+        "name": "Reset",
         "rules": [
             {
                 "t": "set",
@@ -402,7 +404,7 @@
         "id": "30fb8a9c5f72f5b3",
         "type": "switch",
         "z": "14899cc76b048f4b",
-        "name": "SEL",
+        "name": "Select",
         "property": "payload",
         "propertyType": "msg",
         "rules": [
@@ -517,7 +519,7 @@
         "id": "e3d3382b11ca2e3f",
         "type": "debug",
         "z": "14899cc76b048f4b",
-        "name": "debug 3",
+        "name": "On Delay",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -557,14 +559,14 @@
         "name": "On Interval",
         "info": "",
         "x": 820,
-        "y": 700,
+        "y": 760,
         "wires": []
     },
     {
         "id": "1331abc2042fdd23",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "ADD",
+        "name": "MSG",
         "rules": [
             {
                 "t": "set",
@@ -591,7 +593,7 @@
         "id": "b5e22f79cf4cfd55",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "ADD",
+        "name": "Msg",
         "rules": [
             {
                 "t": "set",
@@ -607,7 +609,7 @@
         "to": "",
         "reg": false,
         "x": 450,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "3ba3b59f6306acad"
@@ -618,7 +620,7 @@
         "id": "c4e84511b2d68e35",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "ADD",
+        "name": "Msg",
         "rules": [
             {
                 "t": "set",
@@ -655,7 +657,7 @@
         "id": "bb7b1bb6dca209f5",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "OFF",
+        "name": "Off",
         "rules": [
             {
                 "t": "set",
@@ -683,7 +685,7 @@
         "id": "64d21fc0b8b6091b",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "ON",
+        "name": "On",
         "rules": [
             {
                 "t": "set",
@@ -711,7 +713,7 @@
         "id": "c315b2d2de1f66d8",
         "type": "function",
         "z": "14899cc76b048f4b",
-        "name": "gate",
+        "name": "Gate",
         "func": "if (!msg.payload && context.get(\"timed\")) {\n    context.set(\"timed\", false);\n    return msg;\n} else if (msg.payload && !context.get(\"timed\")) {\n    context.set(\"timed\", true);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
@@ -730,7 +732,7 @@
         "id": "7f819ee7d0dda398",
         "type": "function",
         "z": "14899cc76b048f4b",
-        "name": "gate",
+        "name": "Gate",
         "func": "if (msg.payload && context.get(\"timed\")) {\n    context.set(\"timed\", false);\n    return msg;\n} else if (!msg.payload && !context.get(\"timed\")) {\n    context.set(\"timed\", true);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
@@ -842,7 +844,7 @@
         "id": "8f6359cff2ecfc70",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "SET",
+        "name": "Flow",
         "rules": [
             {
                 "t": "set",
@@ -868,9 +870,9 @@
         "type": "range",
         "z": "14899cc76b048f4b",
         "minin": "0",
-        "maxin": "5",
+        "maxin": "1",
         "minout": "0",
-        "maxout": "5000",
+        "maxout": "1000",
         "action": "scale",
         "round": false,
         "property": "payload",
@@ -887,7 +889,7 @@
         "id": "432b3edcefe3eb33",
         "type": "switch",
         "z": "14899cc76b048f4b",
-        "name": "SET?",
+        "name": "Set?",
         "property": "topic",
         "propertyType": "msg",
         "rules": [
@@ -923,9 +925,9 @@
         "type": "range",
         "z": "14899cc76b048f4b",
         "minin": "0",
-        "maxin": "5",
+        "maxin": "1",
         "minout": "0",
-        "maxout": "5000",
+        "maxout": "1000",
         "action": "scale",
         "round": false,
         "property": "payload",
@@ -942,7 +944,7 @@
         "id": "8365e482d59140c3",
         "type": "switch",
         "z": "14899cc76b048f4b",
-        "name": "SET?",
+        "name": "Set?",
         "property": "topic",
         "propertyType": "msg",
         "rules": [
@@ -959,7 +961,7 @@
         "repair": false,
         "outputs": 2,
         "x": 310,
-        "y": 720,
+        "y": 780,
         "wires": [
             [
                 "07b0b2cb9a6fbfab"
@@ -978,15 +980,15 @@
         "type": "range",
         "z": "14899cc76b048f4b",
         "minin": "0",
-        "maxin": "5",
+        "maxin": "1",
         "minout": "0",
-        "maxout": "5000",
+        "maxout": "1000",
         "action": "scale",
         "round": false,
         "property": "payload",
         "name": "x1000",
         "x": 450,
-        "y": 700,
+        "y": 760,
         "wires": [
             [
                 "6b5f15061802d557"
@@ -997,7 +999,7 @@
         "id": "6b5f15061802d557",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "SET",
+        "name": "Flow",
         "rules": [
             {
                 "t": "set",
@@ -1013,7 +1015,7 @@
         "to": "",
         "reg": false,
         "x": 570,
-        "y": 700,
+        "y": 760,
         "wires": [
             []
         ]
@@ -1022,7 +1024,7 @@
         "id": "82137bb44bca6fc2",
         "type": "change",
         "z": "14899cc76b048f4b",
-        "name": "SET",
+        "name": "Flow",
         "rules": [
             {
                 "t": "set",
@@ -1123,7 +1125,7 @@
         "payload": "5",
         "payloadType": "num",
         "x": 170,
-        "y": 700,
+        "y": 760,
         "wires": [
             [
                 "8365e482d59140c3"
@@ -1152,7 +1154,7 @@
         "payload": "2",
         "payloadType": "num",
         "x": 170,
-        "y": 660,
+        "y": 720,
         "wires": [
             [
                 "8365e482d59140c3"
@@ -1176,7 +1178,7 @@
         "name": "Set Delay",
         "info": "",
         "x": 320,
-        "y": 680,
+        "y": 740,
         "wires": []
     }
 ]
