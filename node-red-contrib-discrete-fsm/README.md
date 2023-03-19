@@ -8,7 +8,13 @@ or use the Node-RED palette manager and serach for <code>discrete-fsm</code>
 
 This is a set of Node-RED nodes that implements Finite State Machines (FSM). Each Input, Output, Condition, and State of the FSM is modeled as a discrete node in a Node-RED flow. 
 
-(graphic example of a state machine diagram and corresponding node-red flow) 
+A state machine that is typically shown like this
+
+![A state machine bubble diagram with 2 states](images/state-machine.png "Simple State Machine" )
+
+Is modeled like this in the Node-RED discrete fsm
+
+![A Node-RED flow with discrete fsm nodes](images/state-machine-discrete.png "Node-RED Discrete State Machine" )
 
 Inputs and Outputs correspond to the familiar definition for FSM Inputs and Outputs. Output values are only dependent on the current state (i.e. a Moore machine). Inputs and Outputs may be boolean, number, or string data type. 
 
