@@ -8,6 +8,15 @@
   },
   "author": "Michael Koster",
   "license": "MIT",
+  "keywords": ["node-red", "fsm", "finite state machine", "state machine", "plc" ],
+  "homepage": "https://github.com/mjkoster/node-red-contrib-discrete-fsm",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mjkoster/node-red-contrib-discrete-fsm.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mjkoster/node-red-contrib-discrete-fsm/issues"
+	},
   "node-red" : {
     "nodes": {
       "input": "input.js",
