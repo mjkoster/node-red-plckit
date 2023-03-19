@@ -42,7 +42,7 @@ module.exports = function(RED) {
         node.status({});
         node.send(msg);
       }
-      if(msg.topic == 'transition' &&  msg.payload == node.name) {
+      if(msg.topic == 'transition' &&  msg.payload == node.name && !node.context().get('isCurrentState')) {
         node.context().set('isCurrentState',true);
         node.status({fill:"green",shape:"dot",text:"active"});
         msg.topic = 'output';
