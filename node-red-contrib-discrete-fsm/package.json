@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Koster",
-  "license": "BSD-2-Clause",
+  "license": "BSD-3-Clause",
   "keywords": ["node-red", "fsm", "finite state machine", "state machine", "plc" ],
   "homepage": "https://github.com/mjkoster/node-red-contrib-discrete-fsm",
 	"repository": {
