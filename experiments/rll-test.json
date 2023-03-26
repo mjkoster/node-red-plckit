@@ -1,0 +1,411 @@
+[
+    {
+        "id": "fc35a17cea417e7c",
+        "type": "tab",
+        "label": "RLL test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cdddbeac95d0c772",
+        "type": "junction",
+        "z": "fc35a17cea417e7c",
+        "x": 220,
+        "y": 400,
+        "wires": [
+            [
+                "16b4cf82b3d8728f",
+                "71a6cccb1c18b312"
+            ]
+        ]
+    },
+    {
+        "id": "310a635755d45fe3",
+        "type": "junction",
+        "z": "fc35a17cea417e7c",
+        "x": 740,
+        "y": 400,
+        "wires": [
+            [
+                "46632ad093fedbe1"
+            ]
+        ]
+    },
+    {
+        "id": "cd6be2dad9429a17",
+        "type": "inject",
+        "z": "fc35a17cea417e7c",
+        "name": "Init",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "nodename",
+                "v": "init",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "init",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "cdddbeac95d0c772"
+            ]
+        ]
+    },
+    {
+        "id": "157c44669baf7511",
+        "type": "function",
+        "z": "fc35a17cea417e7c",
+        "name": "RUN",
+        "func": "if (msg.topic == 'sync') {\n    var oldstate = context.get('state');\n    context.set('state',msg.payload);\n    msg.topic = 'coilstate';\n    msg.nodename = node.name\n    if (context.get('state') != oldstate) {\n        return msg;\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('state', false);",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 360,
+        "wires": [
+            [
+                "310a635755d45fe3"
+            ]
+        ],
+        "icon": "font-awesome/fa-circle-o"
+    },
+    {
+        "id": "16b4cf82b3d8728f",
+        "type": "function",
+        "z": "fc35a17cea417e7c",
+        "name": "RUN.1",
+        "func": "onmessage: {\n    if (msg.topic == 'coilstate' && msg.nodename == context.get('coilname')) {\n        context.set('contact', context.get('normal') ? !msg.payload : msg.payload);\n        return msg;\n    } else if (msg.topic == 'sync') {\n        var inputs = context.get('inputs');\n        inputs[msg.nodename] = { time: msg.timestamp, value: msg.payload };\n        context.set('inputs', inputs);\n        var sum = false;\n        for (var input in inputs) {\n            if (inputs[input].time != msg.timestamp) {\n                break onmessage;\n            }\n            sum ||= inputs[input].value;\n        }\n        msg.payload = sum && context.get('contact');\n        msg.nodename = node.name;\n        return msg;\n    } else if (msg.topic == 'init' && !(msg.nodename in context.get('inputs'))) {\n        var inputs = context.get('inputs');\n        inputs[msg.nodename] = { time: msg.timestamp, value: msg.payload };\n        context.set('inputs', inputs);\n        msg.nodename = node.name;\n        return msg;\n    }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('inputs', {});\nvar name = node.name;\nif (name.startsWith('!')) {\n    name = name.substring(1);\n    context.set('normal', true);\n} else {\n    context.set('normal', false);\n}\nvar dot = name.indexOf('.');\nname = name.substring(0, dot);\ncontext.set('coilname', name);\ncontext.set('contact', context.get('normal'));",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "38a1f8bd95364a9d",
+                "f11d53fd8f39fd54"
+            ]
+        ],
+        "icon": "node-red/hash.svg"
+    },
+    {
+        "id": "1734bdc4289c06eb",
+        "type": "debug",
+        "z": "fc35a17cea417e7c",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "38a1f8bd95364a9d",
+        "type": "function",
+        "z": "fc35a17cea417e7c",
+        "name": "!STOP.1",
+        "func": "onmessage: {\n    if (msg.topic == 'coilstate' && msg.nodename == context.get('coilname')) {\n        context.set('contact', context.get('normal') ? !msg.payload : msg.payload);\n        return msg;\n    } else if (msg.topic == 'sync') {\n        var inputs = context.get('inputs');\n        inputs[msg.nodename] = { time: msg.timestamp, value: msg.payload };\n        context.set('inputs', inputs);\n        var sum = false;\n        for (var input in inputs) {\n            if (inputs[input].time != msg.timestamp) {\n                break onmessage;\n            }\n            sum ||= inputs[input].value;\n        }\n        msg.payload = sum && context.get('contact');\n        msg.nodename = node.name;\n        return msg;\n    } else if (msg.topic == 'init' && !(msg.nodename in context.get('inputs'))) {\n        var inputs = context.get('inputs');\n        inputs[msg.nodename] = { time: msg.timestamp, value: msg.payload };\n        context.set('inputs', inputs);\n        msg.nodename = node.name;\n        return msg;\n    }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('inputs', {});\nvar name = node.name;\nif (name.startsWith('!')) {\n    name = name.substring(1);\n    context.set('normal', true);\n} else {\n    context.set('normal', false);\n}\nvar dot = name.indexOf('.');\nname = name.substring(0, dot);\ncontext.set('coilname', name);\ncontext.set('contact', context.get('normal'));",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "157c44669baf7511",
+                "f11d53fd8f39fd54"
+            ]
+        ],
+        "icon": "node-red/hash.svg"
+    },
+    {
+        "id": "71a6cccb1c18b312",
+        "type": "function",
+        "z": "fc35a17cea417e7c",
+        "name": "START.1",
+        "func": "onmessage: {\n    if (msg.topic == 'coilstate' && msg.nodename == context.get('coilname')) {\n        context.set('contact', context.get('normal') ? !msg.payload : msg.payload);\n        return msg;\n    } else if (msg.topic == 'sync') {\n        var inputs = context.get('inputs');\n        inputs[msg.nodename] = { time: msg.timestamp, value: msg.payload };\n        context.set('inputs', inputs);\n        var sum = false;\n        for (var input in inputs) {\n            if (inputs[input].time != msg.timestamp) {\n                break onmessage;\n            }\n            sum ||= inputs[input].value;\n        }\n        msg.payload = sum && context.get('contact');\n        msg.nodename = node.name;\n        return msg;\n    } else if (msg.topic == 'init' && !(msg.nodename in context.get('inputs'))) {\n        var inputs = context.get('inputs');\n        inputs[msg.nodename] = { time: msg.timestamp, value: msg.payload };\n        context.set('inputs', inputs);\n        msg.nodename = node.name;\n        return msg;\n    }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('inputs', {});\nvar name = node.name;\nif (name.startsWith('!')) {\n    name = name.substring(1);\n    context.set('normal', true);\n} else {\n    context.set('normal', false);\n}\nvar dot = name.indexOf('.');\nname = name.substring(0, dot);\ncontext.set('coilname', name);\ncontext.set('contact', context.get('normal'));",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "38a1f8bd95364a9d",
+                "f11d53fd8f39fd54"
+            ]
+        ],
+        "icon": "node-red/hash.svg"
+    },
+    {
+        "id": "2f3828fb765f845e",
+        "type": "function",
+        "z": "fc35a17cea417e7c",
+        "name": "STOP",
+        "func": "if (msg.topic == 'sync') {\n    var oldstate = context.get('state');\n    context.set('state', msg.payload);\n    msg.topic = 'coilstate';\n    msg.nodename = node.name\n    if (context.get('state') != oldstate) {\n        return msg;\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('state', false);",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 240,
+        "wires": [
+            [
+                "310a635755d45fe3"
+            ]
+        ],
+        "icon": "font-awesome/fa-circle-o"
+    },
+    {
+        "id": "b30a49347ecd99ca",
+        "type": "function",
+        "z": "fc35a17cea417e7c",
+        "name": "START",
+        "func": "if (msg.topic == 'sync') {\n    var oldstate = context.get('state');\n    context.set('state', msg.payload);\n    msg.topic = 'coilstate';\n    msg.nodename = node.name\n    if (context.get('state') != oldstate) {\n        return msg;\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('state', false);",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 200,
+        "wires": [
+            [
+                "310a635755d45fe3"
+            ]
+        ],
+        "icon": "font-awesome/fa-circle-o"
+    },
+    {
+        "id": "d444d55ed055deca",
+        "type": "inject",
+        "z": "fc35a17cea417e7c",
+        "name": "Sync",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "sync",
+        "payload": "",
+        "payloadType": "date",
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "ac387bab2c3bc8e2"
+            ]
+        ]
+    },
+    {
+        "id": "3e5a6e6c27e95120",
+        "type": "inject",
+        "z": "fc35a17cea417e7c",
+        "name": "Sync",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "sync",
+        "payload": "",
+        "payloadType": "date",
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "33c955e61bcaf239"
+            ]
+        ]
+    },
+    {
+        "id": "ac387bab2c3bc8e2",
+        "type": "trigger",
+        "z": "fc35a17cea417e7c",
+        "name": "MC",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 530,
+        "y": 200,
+        "wires": [
+            [
+                "b30a49347ecd99ca"
+            ]
+        ]
+    },
+    {
+        "id": "33c955e61bcaf239",
+        "type": "trigger",
+        "z": "fc35a17cea417e7c",
+        "name": "MC",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "2f3828fb765f845e"
+            ]
+        ]
+    },
+    {
+        "id": "2d7e80151f85177a",
+        "type": "inject",
+        "z": "fc35a17cea417e7c",
+        "name": "Sync",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "nodename",
+                "v": "init",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "sync",
+        "payload": "true",
+        "payloadType": "str",
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "cdddbeac95d0c772"
+            ]
+        ]
+    },
+    {
+        "id": "46632ad093fedbe1",
+        "type": "switch",
+        "z": "fc35a17cea417e7c",
+        "name": "coilstate",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "coilstate",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 785,
+        "y": 400,
+        "wires": [
+            [
+                "1734bdc4289c06eb"
+            ],
+            [
+                "cdddbeac95d0c772",
+                "1734bdc4289c06eb"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "f11d53fd8f39fd54",
+        "type": "debug",
+        "z": "fc35a17cea417e7c",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 500,
+        "wires": []
+    }
+]

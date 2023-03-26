@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 700 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <g transform="matrix(1, 0, 0, 1, 79.547119, 26.41865)">
+    <rect x="64.099" y="21.197" width="30.088" height="313.059" style="stroke: rgb(0, 0, 0);"/>
+    <path d="M 601.584 456.397 L 664.639 561.825 L 538.53 561.825 L 601.584 456.397 Z" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, -364.945648, 776.067627)" bx:shape="triangle 538.53 456.397 126.109 105.428 0.5 0 1@b1e2b32e"/>
+    <rect x="-3087.118" y="269.192" width="24.091" height="66.632" style="stroke: rgb(0, 0, 0);" transform="matrix(0, 1, 1, 0, -242.766632, 3108.135254)"/>
+    <rect x="-3087.118" y="269.192" width="24.091" height="66.632" style="stroke: rgb(0, 0, 0);" transform="matrix(0, 1, 1, 0, -242.176117, 3199.6875)"/>
+    <rect x="-3087.118" y="269.192" width="24.091" height="66.632" style="stroke: rgb(0, 0, 0);" transform="matrix(0, 1, 1, 0, -241.924774, 3295.414062)"/>
+    <rect x="3087.118" y="-269.192" width="24.091" height="66.632" style="stroke: rgb(0, 0, 0);" transform="matrix(0, 1, 1, 0, 295.533875, -2776.429199)"/>
+  </g>
+  <g transform="matrix(1, 0, 0, 1, 138.989044, 17.37291)">
+    <rect x="306.813" y="29.852" width="30.088" height="313.059" style="stroke: rgb(0, 0, 0);"/>
+    <rect x="398.937" y="31.859" width="30.088" height="313.059" style="stroke: rgb(0, 0, 0);"/>
+    <rect x="306.813" y="8.654" width="30.088" height="90.759" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, 393.186127, 510.222443)"/>
+    <rect x="306.813" y="8.654" width="30.088" height="90.759" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, 235.315811, 509.901245)"/>
+    <rect x="351.436" y="31.876" width="30.088" height="313.059" style="stroke: rgb(0, 0, 0);" transform="matrix(0.766045, -0.642787, 0.642787, 0.766045, -35.364685, 279.647339)"/>
+  </g>
+  <g transform="matrix(1, 0, 0, 1, 142.307648, 49.305126)">
+    <rect x="304.063" y="382.601" width="30.088" height="313.059" style="stroke: rgb(0, 0, 0);"/>
+    <rect x="396.187" y="384.608" width="30.088" height="313.059" style="stroke: rgb(0, 0, 0);"/>
+    <rect x="306.813" y="8.654" width="30.088" height="90.759" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, 390.436157, 862.971069)"/>
+    <rect x="306.813" y="8.654" width="30.088" height="90.759" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, 232.565842, 862.649902)"/>
+  </g>
+  <g transform="matrix(1, 0, 0, 1, 150.758621, 59.018902)">
+    <g>
+      <ellipse style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 30px;" cx="36.014" cy="528.09" rx="81.852" ry="81.852"/>
+      <rect x="279.036" y="7.871" width="27.364" height="82.542" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, 98.70578, 823.768066)"/>
+      <rect x="279.036" y="7.871" width="27.364" height="82.542" style="stroke: rgb(0, 0, 0);" transform="matrix(0, -1, 1, 0, -124.112808, 820.069336)"/>
+      <rect x="-118" y="427" width="309" height="203" style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 0px;" bx:origin="0.476306 0.5"/>
+    </g>
+  </g>
+</svg>
